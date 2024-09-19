@@ -1,0 +1,104 @@
+{
+    "data": [
+        {
+            "Id": 1,
+            "Name": "NPC",
+            "JSON": "/characterV2/character_v1.6",
+            "Atlas": "/characterV2/character_v1.6.atlas",
+            "PNG":["/characterV2/character_v1.6","/characterV2/character_v1.6_2","/characterV2/character_v1.6_3"],
+            "Material":"/characterV2/character_v1.6_character_v1.6",
+            "Path": "/character/character_v1_SkeletonData"
+        },
+        {
+            "Id": 2,
+            "Name": "巴布",
+            "Path":"/babu/lanlongbabu_v1_SkeletonData"
+        },
+        {
+            "Id": 3,
+            "Name": "新巴布",
+            "Path":"/babu/babu_v1_SkeletonData"
+        },{
+            "Id": 4,
+            "Name": "纳威",
+            "Path":"/nawei/nawei_v1_SkeletonData"
+        },
+        {
+            "Id": 5,
+            "Name": "哥布林4",
+            "Path":"/gebulin/gebulin_v1_SkeletonData"
+        },
+        {
+            "Id": 6,
+            "Name": "巴布吃单词",
+            "Path":"/babuchi/babu_v1_SkeletonData"
+        },{
+            "Id": 7,
+            "Name": "新巴布吃单词",
+            "Path":"/nbabuchi/babuchidongxi_v1_SkeletonData"
+        },
+        {
+            "Id": 8,
+            "Name": "生气机",
+            "Path":"/shengqiji/shengqiji_SkeletonData"
+        },
+        {
+            "Id": 9,
+            "Name": "茶壶",
+            "Path": "/chahu/chahu_SkeletonData"
+        },
+        {
+            "Id": 10,
+            "Name": "TheEnd",
+            "Path": "/rolePlay/sahua_SkeletonData"
+        },
+        {
+            "Id": 11,
+            "Name": "家-宝剑",
+            "Path":"/buddy/baojian_SkeletonData"
+        },
+        {
+            "Id": 12,
+            "Name": "家-壁炉",
+            "Path": "/buddy/bilu_SkeletonData"
+        },{
+            "Id": 13,
+            "Name": "家-窗户",
+            "Path":"/buddy/chuanghu_SkeletonData"
+        },
+        {
+            "Id": 14,
+            "Name": "家-法杖",
+            "Path":"/buddy/fazhang_SkeletonData"
+        },
+        {
+            "Id": 15,
+            "Name": "家-罐子",
+            "Path":"/buddy/guanzi_SkeletonData"
+        },{
+            "Id": 16,
+            "Name": "家-魔法球",
+            "Path":"/buddy/mofaqiu_SkeletonData"
+        },
+        {
+            "Id": 17,
+            "Name": "家-魔法书",
+            "Path":"/buddy/mofashu_SkeletonData"
+        },
+        {
+            "Id": 18,
+            "Name": "家-魔镜",
+            "Path":"/buddy/mojing_SkeletonData"
+        },
+        {
+            "Id": 19,
+            "Name": "家-拳击柱",
+            "Path":"/buddy/quanjizhu_SkeletonData"
+        },
+        {
+            "Id": 20,
+            "Name": "家-蜘蛛",
+            "Path":"/buddy/zhizhu_SkeletonData"
+        }
+    ]
+}
