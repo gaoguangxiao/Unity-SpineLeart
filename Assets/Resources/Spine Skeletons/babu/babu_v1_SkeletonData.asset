@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: babu_v1_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: 33df768def5384656bbcfeb93a6665b2, type: 2}
+  - {fileID: 11400000, guid: 1481d29b2e25645b885b91d6dd36328c, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: d618f6d331c3146258270553fd405383, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: 27c04f86dee25422db886e76413d1737, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0
@@ -27,5 +27,5 @@ MonoBehaviour:
   fromAnimation: []
   toAnimation: []
   duration: []
-  defaultMix: 0.2
+  defaultMix: 0
   controller: {fileID: 0}

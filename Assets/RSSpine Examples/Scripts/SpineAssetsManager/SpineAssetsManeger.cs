@@ -9,6 +9,9 @@ using System;
 //{
 public class SpineAssetsManeger
 {
+    // 默认材质球
+    //public Material materialPropertySource;
+
     // 假设骨骼文件名为 "Skeleton"，并且位于 Resources 文件夹内
     private string NaweiResourcePath = "Spine Skeletons";
 
@@ -104,24 +107,37 @@ public class SpineAssetsManeger
     //通过本地json、png、alts产生
     public SkeletonDataAsset GetSpineModelV3(Datum datum)
     {
-        Debug.Log("json: " + datum.JSON);
-        
+        //Debug.Log("json: " + datum.JSON);
+        //数据完善之后可以移除
+        if(datum.JSON == null)
+        {
+            SkeletonDataAsset PathAsset = Resources.Load<SkeletonDataAsset>(NaweiResourcePath + datum.Path);
+            return PathAsset;
+        }
+
+        if(datum.PNG.Length < 1)
+        {
+            Debug.Log("No png found");
+            return null;
+        }
         //Read atlas
         TextAsset atlasText = Resources.Load<TextAsset>(GetSkeletonPath(datum.Atlas));
         //Read image texture
         Texture2D[] textures = GetTexture2DByPath(datum.PNG);
         // 材质
-        Material materialPropertySource = GetMaterialByPath(datum.Material);
-        
+        Material material = GetMaterialByPath(datum.PNG[0]);
+        //if (materialPropertySource == null) {
+            //return null;
+        //}
         //在unity使用spine导出的资源时，需要将spine的图像集转换为unity可以识别的资源，在spine unity中可以使用`SpineAtlasAsset`加载`Atlas`文件，
-        SpineAtlasAsset runtimeAtlasAsset = SpineAtlasAsset.CreateRuntimeInstance(atlasText, textures, materialPropertySource, true, null, true);
+        SpineAtlasAsset runtimeAtlasAsset = SpineAtlasAsset.CreateRuntimeInstance(atlasText, textures, material, true, null, true);
         Debug.Log("runtimeAtlasAsset: " + runtimeAtlasAsset);
        
         //Read json
         TextAsset skeletonJson = Resources.Load<TextAsset>(GetSkeletonPath(datum.JSON));
         SkeletonDataAsset asset = SkeletonDataAsset.CreateRuntimeInstance(skeletonJson, runtimeAtlasAsset, true);
         Debug.Log("SkeletonDataAsset is :", asset);
-        //SkeletonDataAsset asset = Resources.Load<SkeletonDataAsset>(NaweiResourcePath + datum.Path);
+       
         return asset;
     }
 
@@ -139,7 +155,11 @@ public class SpineAssetsManeger
 
     Material GetMaterialByPath(string path)
     {
-        Material material = Resources.Load<Material>(GetSkeletonPath(path));
+        Shader shader = Shader.Find("Spine/Skeleton");
+        Material material = new Material(shader);
+        //Using textures as materials
+        material.mainTexture = Resources.Load<Texture2D>(GetSkeletonPath(path));
+
         return material;
     }
 

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: babuchidongxi_v1.0_babuchidongxi_v1.0
+  m_Name: babuchidongxi_v1.0_babuchidongxi_v1.0_2
   m_Shader: {fileID: 4800000, guid: 1e8a610c9e01c3648bac42585e5fc676, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -25,7 +25,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 20d734a71a9c34111b4bdd884c9a4c88, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2a7fb416297d443cda65f5fb9559ef96, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []

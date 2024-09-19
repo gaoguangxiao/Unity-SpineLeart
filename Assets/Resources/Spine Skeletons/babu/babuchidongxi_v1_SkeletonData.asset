@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
   m_Name: babuchidongxi_v1_SkeletonData
   m_EditorClassIdentifier: 
-  atlasAssets:
-  - {fileID: 11400000, guid: f219d9d259244410495fda718cdb5b38, type: 2}
+  atlasAssets: []
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: db7ca9f49f062457baa529e89c9cdaa5, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: d854d1c1167aa44198491b803ac47443, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0
@@ -27,5 +26,5 @@ MonoBehaviour:
   fromAnimation: []
   toAnimation: []
   duration: []
-  defaultMix: 0.2
+  defaultMix: 0
   controller: {fileID: 0}

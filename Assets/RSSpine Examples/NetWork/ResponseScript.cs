@@ -54,7 +54,7 @@ namespace QuickType
         public string[] PNG { get; set; }
 
         //材质
-        public string Material { get; set; }
+        //public string Material { get; set; }
 
         //获取角色之后如果有部分皮肤
         //public bool isPartSKin { get; set; }

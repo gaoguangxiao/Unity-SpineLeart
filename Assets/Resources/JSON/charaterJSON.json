@@ -3,21 +3,24 @@
         {
             "Id": 1,
             "Name": "NPC",
-            "JSON": "/characterV2/character_v1.6",
-            "Atlas": "/characterV2/character_v1.6.atlas",
-            "PNG":["/characterV2/character_v1.6","/characterV2/character_v1.6_2","/characterV2/character_v1.6_3"],
-            "Material":"/characterV2/character_v1.6_character_v1.6",
-            "Path": "/character/character_v1_SkeletonData"
+            "JSON": "/character/character_v1.6",
+            "Atlas": "/character/character_v1.6.atlas",
+            "PNG":["/character/character_v1.6","/character/character_v1.6_2","/character/character_v1.6_3"]
         },
         {
             "Id": 2,
             "Name": "巴布",
-            "Path":"/babu/lanlongbabu_v1_SkeletonData"
+            "JSON": "/babu/lanlongbabu_v1.3",
+            "Atlas": "/babu/lanlongbabu_v1.3.atlas",
+            "PNG":["/babu/lanlongbabu_v1.3"]
         },
         {
             "Id": 3,
             "Name": "新巴布",
-            "Path":"/babu/babu_v1_SkeletonData"
+            "Path":"/babu/babu_v1_SkeletonData",
+            "JSON": "/babu/babu_v1.1",
+            "Atlas": "/babu/babu_v1.1.atlas",
+            "PNG":["/babu/babu_v1.1"]
         },{
             "Id": 4,
             "Name": "纳威",
@@ -35,7 +38,7 @@
         },{
             "Id": 7,
             "Name": "新巴布吃单词",
-            "Path":"/nbabuchi/babuchidongxi_v1_SkeletonData"
+            "Path":"/babu/babuchidongxi_v1_SkeletonData"
         },
         {
             "Id": 8,

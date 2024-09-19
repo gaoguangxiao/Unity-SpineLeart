@@ -43,6 +43,12 @@ namespace Spine.Unity.Examples
 
         private void Start()
         {
+            //if (skeletonGraphicMaterial == null)
+            //{
+            //    Debug.Log("init skeletonGraphicMaterial");
+            //    //skeletonGraphicMaterial = new Material();
+            //}
+            //SpineAssetsManeger.Instance.materialPropertySource = skeletonGraphicMaterial;
             StartCoroutine(AddSpineStart(LocalSkeletonDataAsset, startingAnimation, "001"));
         }
 
@@ -102,24 +108,19 @@ namespace Spine.Unity.Examples
 
         public void UpdateSpineDataAsset(Datum datum)
         {
-            SkeletonDataAsset asset = SpineAssetsManeger.Instance.GetSpineModelV2(datum);
-            //SkeletonDataAsset asset = SpineAssetsManeger.Instance.GetSpineModelV3(datum);
+            //SkeletonDataAsset asset = SpineAssetsManeger.Instance.GetSpineModelV2(datum);
+            SkeletonDataAsset asset = SpineAssetsManeger.Instance.GetSpineModelV3(datum);
 
             //移除旧spine
             DestroySpine();
+
+            SkeletonData skeletonData = asset.GetSkeletonData(false);
+
+            InitSkinSkeletonData(skeletonData);
+
             //创建新的spine实例
             if (asset) StartCoroutine(AddSpineStart(asset, startingAnimation, datum.Name));
         }
-
-        //public void UpdateSpineDataAssetV2(Datum datum)
-        //{
-    
-        //    SkeletonDataAsset asset = SpineAssetsManeger.Instance.GetSpineModelV2(datum);
-
-        //    skeletonAnimation.skeletonDataAsset = asset;
-
-        //    //if (asset) StartCoroutine(AddSpineStart(asset, startingAnimation, datum.Name));
-        //}
 
         public void PlayAnimationName(string AnimationName, bool loop = false)
         {
@@ -136,13 +137,18 @@ namespace Spine.Unity.Examples
                 Destroy(sg.gameObject);
         }
 
-        IEnumerator AddSpineStart(SkeletonDataAsset skeletonDataAsset,
-            string startingAnimation,
-            string gameObjectName)
+
+        void InitSkeletonGraphic()
         {
-            if (skeletonDataAsset == null) yield break;
-            SkeletonData skeletonData = skeletonDataAsset.GetSkeletonData(false); // Preload SkeletonDataAsset.
-                                                                                  //Gets the spine action name
+
+        }
+
+        /// <summary>
+        /// 初始化皮肤动画数据
+        /// </summary>
+        /// <param name="skeletonData"></param>
+        void InitSkinSkeletonData(SkeletonData skeletonData)
+        {
             List<ActionList> ans = new List<ActionList>();
             foreach (var animation in skeletonData.Animations)
             {
@@ -191,24 +197,22 @@ namespace Spine.Unity.Examples
             if (skinNames.Length > 0)
                 startingSkin = skinNames[0].Name;
 
-            yield return true;// Pretend stuff is happening.
-                              //sg = SkeletonGraphic.NewSkeletonGraphicGameObject(skeletonDataAsset, this.transform, skeletonGraphicMaterial); // Spawn a new SkeletonGraphic GameObject.
+        }
+
+        IEnumerator AddSpineStart(SkeletonDataAsset skeletonDataAsset,
+            string startingAnimation,
+            string gameObjectName)
+        {
+            //sg = SkeletonGraphic.NewSkeletonGraphicGameObject(skeletonDataAsset, this.transform, skeletonGraphicMaterial); // Spawn a new SkeletonGraphic GameObject.
 
             sg = SkeletonAnimation.NewSkeletonAnimationGameObject(skeletonDataAsset);
-            Skeleton skeleton = sg.Skeleton;
-
             sg.transform.SetParent(this.transform, false);
 
-            //if (skeletonAnimation != null)
-            //{
-            //sa.Initialize(false);
-            //sa.AnimationState.SetAnimation(0, spineAnimation, true);
-            //}
+            Skeleton skeleton = sg.Skeleton;
 
             sg.gameObject.name = gameObjectName;
             spineAnimationState = sg.AnimationState;
             //sg.layoutScaleMode = SkeletonGraphic.LayoutMode.FitInParent;
-            //sg.gameObject.transform.localScale = new Vector3(0.9,0.9,0.9);
             // Extra Stuff
             sg.Initialize(false);
             //Debug.Log("The spine skin set is" + startingSkin);
@@ -234,6 +238,8 @@ namespace Spine.Unity.Examples
             spineAnimationState.SetAnimation(0, startingAnimation, true);
 
             Debug.Log("spine load finish");
+
+            yield return true;// Pretend stuff is happening.
         }
 
 
