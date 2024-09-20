@@ -1,10 +1,11 @@
-namespace QuickType
-{
-    using System;
+ using System;
     using System.Collections.Generic;
     using System.Globalization;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
+namespace QuickType
+{
+   
 
     /// <summary>
     /// Request
@@ -100,6 +101,11 @@ namespace QuickType
         [JsonProperty("subName")]
         public string SubName { get; set; }
 
+        //衣服本地图片路径
+        [JsonProperty("path")]
+        public string Path { get; set; }
+
+        //衣服别名
         [JsonProperty("remark")]
         public string Remark { get; set; }
     }

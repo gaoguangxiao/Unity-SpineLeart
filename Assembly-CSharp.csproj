@@ -60,13 +60,19 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.34f1c1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/RSSpine Examples/Scripts/MainScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/ButtonPrefab/SkinObjScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Action/CreateButton.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Action/ChildControlScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/CharacterPannelMono.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/FaceMono.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/SpineAssetsManager/SpineAssetsManeger.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Net/DressNetScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/SkinUpdateMono.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/SpineAssetsManager/SkeletonGraphicScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Old/BabuSpineScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/ActionControl.cs" />
+    <Compile Include="Assets/RSSpine Examples/NetWork/RSResponseScriptV2.cs" />
     <Compile Include="Assets/MecanimScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/TypeMono.cs" />
     <Compile Include="Assets/RSSpine Examples/NetWork/ResponseScript.cs" />

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using QuickType;
+using System;
+
 namespace Spine.Unity.Examples
 {
     public class SkeletonGraphicScript : MonoBehaviour
@@ -37,10 +39,17 @@ namespace Spine.Unity.Examples
         //
         Skin characterSkin;
 
+        public Action<int> OnSpineLoadComplete;
+
         private void Start()
         {
             if (LocalSkeletonDataAsset != null)
             {
+                //
+                SkeletonData skeletonData = LocalSkeletonDataAsset.GetSkeletonData(false);
+
+                InitSkinSkeletonData(skeletonData);
+
                 StartCoroutine(AddSpineStart(LocalSkeletonDataAsset, startingAnimation, "001"));
             }
         }
@@ -234,6 +243,8 @@ namespace Spine.Unity.Examples
             Debug.Log("spine load finish");
 
             yield return true;// Pretend stuff is happening.
+
+            if (OnSpineLoadComplete != null) OnSpineLoadComplete(0);
         }
 
 

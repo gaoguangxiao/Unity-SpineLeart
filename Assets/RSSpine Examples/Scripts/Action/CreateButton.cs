@@ -23,7 +23,8 @@ namespace Spine.Unity.Examples
         public Action<string> action;
 
         //SkinList
-        public Action<SkinList> actionSkin;
+        public Action<GameObject> actionSkin;
+
         SkinList[] LocalSkinLists = { };
 
         public void DestroyActionUI()
@@ -107,6 +108,28 @@ namespace Spine.Unity.Examples
             }
         }
 
+        /// <summary>
+        /// 设置皮肤列表
+        /// </summary>
+        /// <param name="datum"></param>
+        /// <param name="skinType">0全部，1部分</param>
+        public void CreateSkinV2(UnlockDressList[] dressLists)
+        {
+
+            DestroyActionUI();
+
+            for (int i = 0; i < dressLists.Length; i++)
+            {
+                UnlockDressList skinList = dressLists[i];
+
+                GameObject buttonGameObject = GameObject.Instantiate(ButtonPrefab, ContentView.transform);
+                SkinObjScript buttonScript = buttonGameObject.GetComponent<SkinObjScript>();
+                //add listener
+                buttonGameObject.GetComponent<Button>().onClick.AddListener(() => OnButtonGameClick(buttonGameObject));
+                //return buttonScript;
+                buttonScript.SetSkinV2(skinList);
+            }
+        }
         //动作数据
         public void CreateActionUI(Datum datum, bool isExp)
         {
@@ -143,6 +166,24 @@ namespace Spine.Unity.Examples
             return buttonScript;
         }
 
+        private GXButtonScript InitButton(GameObject prefab, MonoBehaviour monoBehaviour)
+        {
+            GameObject buttonGameObject = GameObject.Instantiate(prefab, ContentView.transform);
+            GXButtonScript buttonScript = buttonGameObject.GetComponent<GXButtonScript>();
+            //add listener
+            buttonGameObject.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(buttonScript));
+            return buttonScript;
+//        }
+//)
+//        {
+//            GameObject buttonGameObject = GameObject.Instantiate(ButtonPrefab, ContentView.transform);
+//            GXButtonScript buttonScript = buttonGameObject.GetComponent<GXButtonScript>();
+//            //add listener
+//            buttonGameObject.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(buttonScript));
+//            return buttonScript;
+        }
+
+
         private GXButtonScript InitButtonName(string name,int index,int clickType)
         {
             GameObject buttonGameObject = GameObject.Instantiate(ButtonPrefab, ContentView.transform);
@@ -167,9 +208,14 @@ namespace Spine.Unity.Examples
             action(buttonScript.TextButton.text);            
         }
 
+        void OnButtonGameClick(GameObject gameObject)
+        {
+            actionSkin(gameObject);
+        }
+
         void OnButtonSkinClick(GXButtonScript buttonScript)
         {
-            actionSkin(LocalSkinLists[buttonScript.buttonIndex]);
+            //actionSkin(LocalSkinLists[buttonScript.buttonIndex]);
         }
     }
 }

@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/RSSpine Examples/Scenes/MainScene.unity
+    guid: 93188841e197e41a1a3a328c4bee7dd7
+  - enabled: 1
     path: Assets/RSSpine Examples/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/RSSpine Examples/Scenes/SkinScene.unity
+    guid: 190d36ae0d8a34d58add9e3593833791
+  - enabled: 1
+    path: Assets/RSSpine Examples/Scenes/FaceScene.unity
+    guid: a4ec045d0431b4d1ca3680a379ef2ab0
   m_configObjects: {}
