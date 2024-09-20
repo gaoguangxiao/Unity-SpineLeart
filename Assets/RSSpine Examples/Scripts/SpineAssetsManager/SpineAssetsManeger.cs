@@ -126,17 +126,14 @@ public class SpineAssetsManeger
         Texture2D[] textures = GetTexture2DByPath(datum.PNG);
         // 材质
         Material material = GetMaterialByPath(datum.PNG[0]);
-        //if (materialPropertySource == null) {
-            //return null;
-        //}
+        
         //在unity使用spine导出的资源时，需要将spine的图像集转换为unity可以识别的资源，在spine unity中可以使用`SpineAtlasAsset`加载`Atlas`文件，
         SpineAtlasAsset runtimeAtlasAsset = SpineAtlasAsset.CreateRuntimeInstance(atlasText, textures, material, true, null, true);
-        Debug.Log("runtimeAtlasAsset: " + runtimeAtlasAsset);
+        //Debug.Log("runtimeAtlasAsset: " + runtimeAtlasAsset);
        
         //Read json
         TextAsset skeletonJson = Resources.Load<TextAsset>(GetSkeletonPath(datum.JSON));
         SkeletonDataAsset asset = SkeletonDataAsset.CreateRuntimeInstance(skeletonJson, runtimeAtlasAsset, true);
-        Debug.Log("SkeletonDataAsset is :", asset);
        
         return asset;
     }

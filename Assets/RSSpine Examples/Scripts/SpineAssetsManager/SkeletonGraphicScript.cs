@@ -21,9 +21,6 @@ namespace Spine.Unity.Examples
         //skin list
         public SkinList[] skinNames = { };
 
-        //sping动画组件
-        //public SkeletonAnimation SkeletonAnimationImmutable;
-
         SkeletonAnimation sg;
 
         //播放速度
@@ -39,16 +36,9 @@ namespace Spine.Unity.Examples
 
         //
         Skin characterSkin;
-        //private Skeleton skeleton;
 
         private void Start()
         {
-            //if (skeletonGraphicMaterial == null)
-            //{
-            //    Debug.Log("init skeletonGraphicMaterial");
-            //    //skeletonGraphicMaterial = new Material();
-            //}
-            //SpineAssetsManeger.Instance.materialPropertySource = skeletonGraphicMaterial;
             StartCoroutine(AddSpineStart(LocalSkeletonDataAsset, startingAnimation, "001"));
         }
 
@@ -65,6 +55,10 @@ namespace Spine.Unity.Examples
             skeleton.ScaleX = -skeleton.ScaleX;
         }
 
+        /// <summary>
+        /// 指定spine皮肤，会移除之前所有皮肤效果
+        /// </summary>
+        /// <param name="skinName"></param>
         public void UpdateSpineSKin(string skinName)
         {
             //Debug.Log("更换皮肤" + skinName);
@@ -74,6 +68,10 @@ namespace Spine.Unity.Examples
             UpdateCombinedSkin(characterSkin);
         }
 
+        /// <summary>
+        /// 混合皮肤，在之前皮肤的基础上叠加
+        /// </summary>
+        /// <param name="skinName"></param>
         public void MixAndMatchSpineSkin(string skinName)
         {
             var skeletonData = sg.Skeleton.Data;
@@ -89,13 +87,12 @@ namespace Spine.Unity.Examples
         }
 
         void UpdateCharaterSkin()
-        {
-            //sg.Skeleton.SetSkin(startingSkin);
-            //v2
+        {   
             var skeletonData = sg.Skeleton.Data;
             characterSkin = new Skin("character-base");
             characterSkin.AddSkin(skeletonData.FindSkin(startingSkin));
         }
+
         void UpdateCombinedSkin(Skin resultCombinedSkin)
         {
             Skeleton skeleton = sg.Skeleton;
@@ -137,11 +134,6 @@ namespace Spine.Unity.Examples
                 Destroy(sg.gameObject);
         }
 
-
-        void InitSkeletonGraphic()
-        {
-
-        }
 
         /// <summary>
         /// 初始化皮肤动画数据
@@ -209,7 +201,6 @@ namespace Spine.Unity.Examples
             sg.transform.SetParent(this.transform, false);
 
             Skeleton skeleton = sg.Skeleton;
-
             sg.gameObject.name = gameObjectName;
             spineAnimationState = sg.AnimationState;
             //sg.layoutScaleMode = SkeletonGraphic.LayoutMode.FitInParent;
@@ -240,6 +231,12 @@ namespace Spine.Unity.Examples
             Debug.Log("spine load finish");
 
             yield return true;// Pretend stuff is happening.
+        }
+
+
+        void InitSkeletonGraphic()
+        {
+
         }
 
 
