@@ -23,7 +23,7 @@ namespace Spine.Unity.Examples
         //skin list
         public SkinList[] skinNames = { };
 
-        SkeletonAnimation sg;
+        SkeletonGraphic sg;
 
         //播放速度
         public float TimeScale = 1.0f;
@@ -31,7 +31,7 @@ namespace Spine.Unity.Examples
         //If true, the animation will be applied in reverse. Events are not fired when an animation is applied in reverse.</summary>
         public bool Reverse = true;
 
-        //true
+        //true，朝右，false朝左
         public bool ReverseX = true;
 
         public Spine.AnimationState spineAnimationState;
@@ -62,6 +62,8 @@ namespace Spine.Unity.Examples
 
         public void UpdateReverseX(bool value)
         {
+            if (value == ReverseX) return;
+
             Skeleton skeleton = sg.Skeleton;
             ReverseX = value;
             skeleton.ScaleX = -skeleton.ScaleX;
@@ -207,9 +209,9 @@ namespace Spine.Unity.Examples
             string startingAnimation,
             string gameObjectName)
         {
-            //sg = SkeletonGraphic.NewSkeletonGraphicGameObject(skeletonDataAsset, this.transform, skeletonGraphicMaterial); // Spawn a new SkeletonGraphic GameObject.
+            sg = SkeletonGraphic.NewSkeletonGraphicGameObject(skeletonDataAsset, this.transform, skeletonGraphicMaterial); // Spawn a new SkeletonGraphic GameObject.
 
-            sg = SkeletonAnimation.NewSkeletonAnimationGameObject(skeletonDataAsset);
+            //sg = SkeletonAnimation.NewSkeletonAnimationGameObject(skeletonDataAsset);
             sg.transform.SetParent(this.transform, false);
 
             Skeleton skeleton = sg.Skeleton;

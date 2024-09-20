@@ -79,6 +79,7 @@
     <Compile Include="Assets/RSSpine Examples/Scripts/Net/CharacterScript.cs" />
     <Compile Include="Assets/RSSpine Examples/ButtonPrefab/GXButtonScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Old/CharaterSpineScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/PartnerHouseScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
