@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity.Examples;
 using QuickType;
+using UnityEngine.UI;
 
 public class PartnerHouseScript : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class PartnerHouseScript : MonoBehaviour
     private Vector3 targeVector;
     //人物移动 -1左 0不移动 1右
     private int IdleStatus = 0;
+
+    //移动背景画布
+    public ScrollRect BgScrollRect;
 
     private void Awake()
     {
@@ -91,7 +95,10 @@ public class PartnerHouseScript : MonoBehaviour
         {
             return;
         }
-        CharaterGameobject.transform.Translate(vector * MoveSpeed * Time.deltaTime * 100);
+        CharaterGameobject.transform.Translate(vector * MoveSpeed * Time.deltaTime);
+
+        //
+        BgScrollRect.horizontalNormalizedPosition += 1.0f * Time.deltaTime * 1000;
     }
 
     string GetSKin(string spineName)

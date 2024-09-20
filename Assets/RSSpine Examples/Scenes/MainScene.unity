@@ -764,8 +764,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharaterGameobject: {fileID: 493552366}
-  skeletonGraphicScript: {fileID: 493552368}
-  MoveSpeed: 20
+  MoveSpeed: 80
+  BgScrollRect: {fileID: 0}
 --- !u!1 &493552366
 GameObject:
   m_ObjectHideFlags: 0
