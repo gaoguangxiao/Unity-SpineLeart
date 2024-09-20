@@ -39,7 +39,10 @@ namespace Spine.Unity.Examples
 
         private void Start()
         {
-            StartCoroutine(AddSpineStart(LocalSkeletonDataAsset, startingAnimation, "001"));
+            if (LocalSkeletonDataAsset != null)
+            {
+                StartCoroutine(AddSpineStart(LocalSkeletonDataAsset, startingAnimation, "001"));
+            }
         }
 
         public void ResetSkin()
