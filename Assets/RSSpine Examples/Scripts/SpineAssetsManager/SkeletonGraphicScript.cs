@@ -23,7 +23,9 @@ namespace Spine.Unity.Examples
         //skin list
         public SkinList[] skinNames = { };
 
-        SkeletonGraphic sg;
+        //SkeletonGraphic sg;
+        SkeletonAnimation sg;
+
 
         //播放速度
         public float TimeScale = 1.0f;
@@ -209,9 +211,9 @@ namespace Spine.Unity.Examples
             string startingAnimation,
             string gameObjectName)
         {
-            sg = SkeletonGraphic.NewSkeletonGraphicGameObject(skeletonDataAsset, this.transform, skeletonGraphicMaterial); // Spawn a new SkeletonGraphic GameObject.
+            //sg = SkeletonGraphic.NewSkeletonGraphicGameObject(skeletonDataAsset, this.transform, skeletonGraphicMaterial); // Spawn a new SkeletonGraphic GameObject.
 
-            //sg = SkeletonAnimation.NewSkeletonAnimationGameObject(skeletonDataAsset);
+            sg = SkeletonAnimation.NewSkeletonAnimationGameObject(skeletonDataAsset);
             sg.transform.SetParent(this.transform, false);
 
             Skeleton skeleton = sg.Skeleton;
