@@ -32,37 +32,37 @@ public class SpineAssetsManeger
         }
     }
 
-    //public SpineAssetsManeger()
-    //{
-    //    Debug.Log("SpineAssetsManeger init SpinePrefabsDict");
+    public SpineAssetsManeger()
+    {
+        Debug.Log("SpineAssetsManeger init SpinePrefabsDict");
 
-    //    SpinePrefabsDict = new Dictionary<long, SkeletonDataAsset>();
-    //    //npc
-    //    SpinePrefabsDict.Add(1, GetSkeletonDataAsset("/character/character_v1_SkeletonData"));
-    //    //babu
-    //    SpinePrefabsDict.Add(2, GetSkeletonDataAsset("/babu/lanlongbabu_v1_SkeletonData"));
-    //    //新巴布
-    //    SpinePrefabsDict.Add(3, GetSkeletonDataAsset("/babu/babu_v1_SkeletonData"));
-    //    //navi
-    //    SpinePrefabsDict.Add(4, GetSkeletonDataAsset("/nawei/nawei_v1_SkeletonData"));
-    //    //哥布林
-    //    SpinePrefabsDict.Add(5, GetSkeletonDataAsset("/gebulin/gebulin_v1_SkeletonData"));
-    //    //巴布吃单词
-    //    SpinePrefabsDict.Add(6, GetSkeletonDataAsset("/babuchi/babu_v1_SkeletonData"));
-    //    //新巴布吃东西
-    //    SpinePrefabsDict.Add(7, GetSkeletonDataAsset("/babu/babuchidongxi_v1_SkeletonData"));
-    //    //生气机
-    //    SpinePrefabsDict.Add(8, GetSkeletonDataAsset("/shengqiji/shengqiji_SkeletonData"));
-    //    //茶壶
-    //    SpinePrefabsDict.Add(9, GetSkeletonDataAsset("/chahu/shengqiji_SkeletonData"));
-    //    //家-宝剑
-    //    SpinePrefabsDict.Add(11, GetSkeletonDataAsset("/buddy/baojian_SkeletonData"));
-    //    //家-壁炉
-    //    SpinePrefabsDict.Add(12, GetSkeletonDataAsset("/buddy/baojian_SkeletonData"));
-    //    //家-窗户
-    //    SpinePrefabsDict.Add(13, GetSkeletonDataAsset("/buddy/chuanghu_SkeletonData"));
-    //    Debug.Log("SpineAssetsManeger init finish,The Spine Count is: " + SpinePrefabsDict.Keys.Count);
-    //}
+        SpinePrefabsDict = new Dictionary<long, SkeletonDataAsset>();
+        //npc
+        SpinePrefabsDict.Add(1, GetSkeletonDataAsset("/character/character_v1_SkeletonData"));
+        //babu
+        SpinePrefabsDict.Add(2, GetSkeletonDataAsset("/babu/lanlongbabu_v1_SkeletonData"));
+        //新巴布
+        SpinePrefabsDict.Add(3, GetSkeletonDataAsset("/babu/babu_v1_SkeletonData"));
+        //navi
+        SpinePrefabsDict.Add(4, GetSkeletonDataAsset("/nawei/nawei_v1_SkeletonData"));
+        //哥布林
+        SpinePrefabsDict.Add(5, GetSkeletonDataAsset("/gebulin/gebulin_v1_SkeletonData"));
+        //巴布吃单词
+        SpinePrefabsDict.Add(6, GetSkeletonDataAsset("/babuchi/babu_v1_SkeletonData"));
+        //新巴布吃东西
+        SpinePrefabsDict.Add(7, GetSkeletonDataAsset("/babu/babuchidongxi_v1_SkeletonData"));
+        //生气机
+        SpinePrefabsDict.Add(8, GetSkeletonDataAsset("/shengqiji/shengqiji_SkeletonData"));
+        //茶壶
+        SpinePrefabsDict.Add(9, GetSkeletonDataAsset("/chahu/shengqiji_SkeletonData"));
+        //家-宝剑
+        SpinePrefabsDict.Add(11, GetSkeletonDataAsset("/buddy/baojian_SkeletonData"));
+        //家-壁炉
+        SpinePrefabsDict.Add(12, GetSkeletonDataAsset("/buddy/baojian_SkeletonData"));
+        //家-窗户
+        SpinePrefabsDict.Add(13, GetSkeletonDataAsset("/buddy/chuanghu_SkeletonData"));
+        Debug.Log("SpineAssetsManeger init finish,The Spine Count is: " + SpinePrefabsDict.Keys.Count);
+    }
 
     public SkeletonDataAsset GetSkeletonDataAsset(string path)
     {

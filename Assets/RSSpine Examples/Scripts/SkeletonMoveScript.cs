@@ -14,6 +14,9 @@ public class SkeletonMoveScript : MonoBehaviour
     //人物相机
     public Camera SkeletonCamera;
 
+    //右不可移动点
+    public GameObject CharaterLeftEndCentter;
+
     //人物左移动屏幕中心
     public GameObject CharaterLeftCenter;
 
@@ -29,8 +32,11 @@ public class SkeletonMoveScript : MonoBehaviour
     //目标点
     //private Vector3 targeVector;
 
-    //角色累计
-    private Vector3 accumulationDistance;
+    //角色开始移动时位置记录
+    private Vector3 lastCharaterVector;
+
+    //角色移动参照物
+    public Transform accumulationIndicatorObject;
 
     //角色待移动距离
     private Vector3 targeDistance;
@@ -59,6 +65,12 @@ public class SkeletonMoveScript : MonoBehaviour
         //CharaterGameobject = this.gameObject;
 
         //Debug.Log("bgGameObject is : " + bgGameObject);
+
+        //Vector3 ve
+        //GetScreenPointByWorld(CharaterGameobject.transform.position)
+        //屏幕左边x为0
+        //accumulationIndicatorObject.transform = 
+        //accumulationDistance = new Vector3(0, 0, 0);
     }
 
     /// <summary>
@@ -90,184 +102,109 @@ public class SkeletonMoveScript : MonoBehaviour
     {
         //鼠标的点击
         //0左键，1右键，2滚轮
-        if (IdleStatus == 0 && Input.touches.Length > 0)
+        if (Input.touches.Length > 0)
         {
             Touch touch = Input.touches[0];
             //获取点击点【0~屏幕宽度】
-            //
+            Debug.Log("touch is: " + touch.position);
+            if (touch.position.y >= Screen.height - 100) return;
+            
 
             Vector3 chaVector = GetScreenPointByWorld(CharaterGameobject.transform.position);
-            Debug.Log("chaVector" + chaVector);
+            //Debug.Log("chaVector" + chaVector);
 
+            //角色跟随相机的位置
+            Vector3 skeletonAccumulationVector3 = GetScreenPointByWorld(accumulationIndicatorObject.position);
+            Debug.Log("skeletonAccumulationVector3 is : " + skeletonAccumulationVector3);
+            //Debug.Log("SkeletonCamera.SkeletonCamera is : " + accumulationIndicatorObject.position);
+
+            //获取点击点相对于角色位移，屏幕点击点相对于主摄像机的点击位置。
+            Vector3 touchVector2D = new Vector3(
+                skeletonAccumulationVector3.x + touch.position.x,
+                skeletonAccumulationVector3.y + touch.position.y,
+                skeletonAccumulationVector3.z);
+
+            //Debug.Log("touchVector2D is : " + touchVector2D);
             //角色是否处于最右边
-            if (chaVector.x >= Screen.width / 2)
-            {
-                moveDistance = new Vector3();
+            //if (chaVector.x >= Screen.width / 2)
+            //{
+            moveDistance = new Vector3();
 
-                if (touch.position.x > Screen.width / 2)
-                {
-                    //获取相对位移，点击坐标相对于人物位移
-                    targeDistance = new Vector3(touch.position.x - Screen.width / 2, touch.position.y, 0);
-                    //移动到最右边了，该角色移动 点击点是屏幕 - 角色坐标
-                    //获取点击点转移3d
-                    Vector3 touchFVector3D = Get3DScreenPointByVector2(touch.position);
-                    //转移到和角色
-                    Vector3 touchFVector2D = GetScreenPointByWorld(touchFVector3D);
-                    Debug.Log("touchFVector2D is:" + touchFVector2D + "touchFVector3D is" + touchFVector3D);
-                }
-                else //
-                {
-                    targeDistance = new Vector3(touch.position.x - Screen.width / 2, touch.position.y, 0);
-                }
-
-            }
-            else
-            {
-                //
-                moveDistance = new Vector3();
-
-                Vector3 vector = new Vector3(touch.position.x, touch.position.y, 0);
-                //获取相对位移
-                targeDistance = vector - chaVector;
-            }
-
+            //点击点相对于角色位移
+            targeDistance = touchVector2D - chaVector;
+  
             Debug.Log("targeDistance" + targeDistance);
-
-
-            //return;
-            //获取角色 3d到2d屏幕，xy一样，当z值不一样，会导致在2d界面xy也不一致，因此相对位置需要移到2d计算。
-
-            //Vector3 chaVector = CharaterGameobject.transform.position;
-
-            ////
-            //moveDistance = new Vector3();
-            ////获取相对位移
-            //targeDistance = targeVector - chaVector;
-
-            //Debug.Log("targeDistance is：" + targeDistance);
-
-            //Debug.Log("CharaterGameobject.x is" + vector);
             // 判断角色移动方向
             IdleStatus = targeDistance.x > 0 ? 1 : -1;
             ////方向
             skeletonGraphicScript.UpdateReverseX(IdleStatus != 1);
             skeletonGraphicScript.PlayAnimationName("zoulu", true);
         }
-
-
-
-        if (IdleStatus != 0)
-        {
-            isIdle = false;
-            //Debug.Log("IdleStatus is: " + IdleStatus);
-            ModeSkeObj(IdleStatus == -1 ? Vector3.left : Vector3.right);
-
-        }
-        else if (IdleStatus == 0)
+        
+         if (IdleStatus == 0)
         {
             if (isIdle) return;
             Debug.Log("playaniam");
             skeletonGraphicScript.PlayAnimationName("animation");
             isIdle = true;
+
+        } else if (IdleStatus != 0)
+        {
+            isIdle = false;
+
+            ModeSkeObj(IdleStatus == -1 ? Vector3.left : Vector3.right);
+
         }
     }
 
     //右
     void AddDistance(Vector3 v1, Vector3 v2)
     {
-        moveDistance += v1 - v2;
-        accumulationDistance += moveDistance;
-    }
-
-    //左
-    void AddDistanceV1(Vector3 v1, Vector3 v2)
-    {
-        moveDistance += v1 - v2;
-        accumulationDistance -= moveDistance;
+        Vector3 distance = v1 - v2;
+        moveDistance += distance;
     }
 
     void ModeSkeObj(Vector3 vector)
     {
         Vector3 chaVertor = GetScreenPointByWorld(CharaterGameobject.transform.position);
-        Debug.Log("chaVertor" + chaVertor + "targeDistance : " + targeDistance + "moveDistance is : " + moveDistance);
-        if (vector.x > 0 && moveDistance.x >= targeDistance.x)
+        //Debug.Log("chaVertor" + chaVertor + "targeDistance : " + targeDistance + "moveDistance is : " + moveDistance);
+
+        Vector3 lE = GetScreenPointByWorld(CharaterLeftEndCentter.transform.position);
+        Vector3 rE = GetScreenPointByWorld(CharaterRightEndCentter.transform.position);
+        //Debug.Log("lE" + lE + "rE" + rE);
+        //角色移动屏幕边缘
+        if (vector.x < 0 && chaVertor.x <= lE.x || vector.x > 0 && chaVertor.x >= rE.x)
         {
             IdleStatus = 0;
+            return;
         }
 
-        //if (vector.x < 0 && chaVertor.x <= targeVector.x)
-        //{
-        //    IdleStatus = 0;
-        //}
-
-        //Debug.Log("chaVertor is：" + chaVertor);
+        //角色移动结束
+        if (vector.x > 0 && moveDistance.x >= targeDistance.x || vector.x < 0 && moveDistance.x <= targeDistance.x)
+        {
+            IdleStatus = 0;
+            return;
+        }
         //角色基本速度
         float baseSpeed = MoveSpeed * Time.deltaTime;
 
-        //累计 人物移动
-        //Vector3 chaDistance = new Vector3(baseSpeed, chaVertor.y, chaVertor.z);
+        Vector3 rc = GetScreenPointByWorld(CharaterRightCenter.transform.position);
+        Vector3 lc = GetScreenPointByWorld(CharaterLeftCenter.transform.position);
 
-
-
-
-        if (vector.x > 0)
+        //角色移动屏幕边缘至左半边
+        if (chaVertor.x >= lc.x && chaVertor.x <= rc.x) //当角色移动屏幕中心点时，控制相机跟随
         {
-            CharaterGameobject.transform.Translate(vector * baseSpeed);
-
-            Vector3 rc = GetScreenPointByWorld(CharaterRightCenter.transform.position);
-            //Vector3 re = GetScreenPointByWorld(CharaterRightEndCentter.transform.position);
-            //Debug.Log("re is" + re);
-            //if (chaVertor.x > re.x) return;
-
-            //角色移动屏幕边缘至左半边
-            if (chaVertor.x >= Screen.width / 2 && chaVertor.x <= rc.x)
-            {
-
-                SkeletonCamera.depth = 0;
-                Transform cameraTransform = SkeletonCamera.transform;
-                cameraTransform.transform.Translate(vector * baseSpeed);
-            }
-
-            //if (chaVertor.x < Screen.width / 2 && chaVertor.x <= CharaterRightCenter.transform.position.x)
-            //{
-            //    //Vector3 oldC = GetScreenPointByWorld(CharaterGameobject.transform.position);
-            //    //CharaterGameobject.transform.Translate(vector * baseSpeed);
-            //    //
-            //    //
-            //    SkeletonCamera.depth = 0;
-            //    Transform cameraTransform = SkeletonCamera.transform;
-            //    cameraTransform.transform.Translate(vector * baseSpeed);
-            //}
-            else //移动相机跟随人物移动
-            {
-
-
-                //SkeletonCamera.depth = -3;
-
-
-                //移
-            }
-
-            //
-            Vector3 newVC = GetScreenPointByWorld(CharaterGameobject.transform.position);
-            //距离累计
-            AddDistance(newVC, chaVertor);
-            //Debug.Log("newVC is : " + newVC);
-            //lastChaVertor = newVC;
+            SkeletonCamera.depth = 0;
+            Transform cameraTransform = SkeletonCamera.transform;
+            cameraTransform.transform.Translate(vector * baseSpeed);
+            accumulationIndicatorObject.Translate(vector * baseSpeed);
         }
-        //角色移动左半边至屏幕边缘
-        if (vector.x < 0)
-        {
-            if (chaVertor.x > 20 && chaVertor.x < Screen.width / 2)
-            {
-                //CharaterGameobject.transform.Translate(vector * baseSpeed);
-            }
-            else
-            {
-                //
-                //bgGameObject.transform.Translate(Vector3.right * baseSpeed);
-            }
 
-        }
+        //移动角色
+        CharaterGameobject.transform.Translate(vector * baseSpeed);
+
+        //累计距离
+        Vector3 newVC = GetScreenPointByWorld(CharaterGameobject.transform.position);
+        AddDistance(newVC, chaVertor);
     }
 }
