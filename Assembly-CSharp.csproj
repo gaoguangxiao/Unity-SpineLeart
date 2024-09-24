@@ -80,8 +80,10 @@
     <Compile Include="Assets/RSSpine Examples/NetWork/ResponseScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Net/CharacterScript.cs" />
     <Compile Include="Assets/RSSpine Examples/ButtonPrefab/GXButtonScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/GodViewCamera.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/SkeletonMoveScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Upgrade.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/CharayerMoveScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Old/CharaterSpineScript.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity.Examples;
 
+
 //挂在角色物体，控制角色和背景移动
 public class SkeletonMoveScript : MonoBehaviour
 {
