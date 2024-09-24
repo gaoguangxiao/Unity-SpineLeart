@@ -106,8 +106,8 @@ public class SkeletonMoveScript : MonoBehaviour
         {
             Touch touch = Input.touches[0];
             //获取点击点【0~屏幕宽度】
-            Debug.Log("touch is: " + touch.position);
-            if (touch.position.y >= Screen.height - 100) return;
+            Debug.Log("touch is: " + touch.position + Screen.height);
+            if (touch.position.y >= Screen.height/2) return;
             
 
             Vector3 chaVector = GetScreenPointByWorld(CharaterGameobject.transform.position);
@@ -115,7 +115,7 @@ public class SkeletonMoveScript : MonoBehaviour
 
             //角色跟随相机的位置
             Vector3 skeletonAccumulationVector3 = GetScreenPointByWorld(accumulationIndicatorObject.position);
-            Debug.Log("skeletonAccumulationVector3 is : " + skeletonAccumulationVector3);
+            //Debug.Log("skeletonAccumulationVector3 is : " + skeletonAccumulationVector3);
             //Debug.Log("SkeletonCamera.SkeletonCamera is : " + accumulationIndicatorObject.position);
 
             //获取点击点相对于角色位移，屏幕点击点相对于主摄像机的点击位置。

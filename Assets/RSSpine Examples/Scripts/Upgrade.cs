@@ -11,6 +11,9 @@ namespace Spine.Unity.Examples
         //家具-窗户-位置
         public GameObject FurnitureWindow;
 
+        //可升级列表
+        private CreateButton UpgradeGamePannel;
+
         // Start is called before the first frame update
         void Start()
         {
