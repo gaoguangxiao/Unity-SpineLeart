@@ -62,27 +62,29 @@
   <ItemGroup>
     <Compile Include="Assets/RSSpine Examples/Scripts/MainScript.cs" />
     <Compile Include="Assets/RSSpine Examples/ButtonPrefab/SkinObjScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/SpineManager/SkeletonGraphicScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Action/CreateButton.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/SpineManager/SkeletonBoneScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Action/ChildControlScript.cs" />
-    <Compile Include="Assets/RSSpine Examples/Scripts/Old/PartnerHouseScript.cs" />
-    <Compile Include="Assets/RSSpine Examples/Scripts/CharacterPannelMono.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/BackGroundWindow.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/FaceMono.cs" />
-    <Compile Include="Assets/RSSpine Examples/Scripts/SpineAssetsManager/SpineAssetsManeger.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Net/DressNetScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/SkinUpdateMono.cs" />
-    <Compile Include="Assets/RSSpine Examples/Scripts/SpineAssetsManager/SkeletonGraphicScript.cs" />
-    <Compile Include="Assets/RSSpine Examples/Scripts/Old/BabuSpineScript.cs" />
-    <Compile Include="Assets/RSSpine Examples/Scripts/ActionControl.cs" />
-    <Compile Include="Assets/RSSpine Examples/Scripts/Old/BgImageScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/SpineManager/SkeletonEventScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/SkeletonMoveScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Demo/ActionControl.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Demo/TypeMono.cs" />
     <Compile Include="Assets/RSSpine Examples/NetWork/RSResponseScriptV2.cs" />
     <Compile Include="Assets/MecanimScript.cs" />
-    <Compile Include="Assets/RSSpine Examples/Scripts/TypeMono.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/CharaterFootScript.cs" />
     <Compile Include="Assets/RSSpine Examples/NetWork/ResponseScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/Upgrade.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Net/CharacterScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Demo/CharacterPannelMono.cs" />
     <Compile Include="Assets/RSSpine Examples/ButtonPrefab/GXButtonScript.cs" />
-    <Compile Include="Assets/RSSpine Examples/Scripts/SkeletonMoveScript.cs" />
-    <Compile Include="Assets/RSSpine Examples/Scripts/Upgrade.cs" />
-    <Compile Include="Assets/RSSpine Examples/Scripts/Old/CharaterSpineScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/SpineManager/SpineAssetsManeger.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/SpineManager/SkeletonControlScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/ButtonPrefab/ChangePanelScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

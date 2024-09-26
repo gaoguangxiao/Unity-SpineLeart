@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-//作为场景加载器
+
+//场景加载器
 public class MainScript : MonoBehaviour
 {
     private AsyncOperation asyncOperation;

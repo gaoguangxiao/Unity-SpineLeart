@@ -7,8 +7,10 @@ using QuickType;
 //添加皮肤游戏物体
 public class SkinUpdateMono : MonoBehaviour
 {
+    public SkeletonControlScript skeletonGraphicScript;
+
     //角色脚本
-    public SkeletonGraphicScript skeletonGraphicScript;
+    //public SkeletonGraphicScript skeletonGraphicScript;
 
     //角色穿戴网络脚本
     DressNetScript dressNetScript;
@@ -22,7 +24,7 @@ public class SkinUpdateMono : MonoBehaviour
     private void Awake()
     {
 
-        skeletonGraphicScript.OnSpineLoadComplete = OnSpineLoadComplete;
+        //skeletonGraphicScript.OnSpineLoadComplete = OnSpineLoadComplete;
 
         dressNetScript = GetComponent<DressNetScript>();
         dressNetScript.OnDataLoadComplete = OnDataLoadComplete;
@@ -50,10 +52,7 @@ public class SkinUpdateMono : MonoBehaviour
         List<UnlockDressList> dressLists = new List<UnlockDressList>();
         dressLists.AddRange(dress.UnlockDressList);
         dressLists.AddRange(dress.LockDressList);
-        //foreach (var item in dress.UnlockDressList)
-        //{
-        //Debug.Log("dreee name is: " + item.Name);
-        //}
+   
         dressL = dressLists.ToArray();
         PartSkinGamePannel.CreateSkinV2(dressL);
     }
@@ -80,7 +79,7 @@ public class SkinUpdateMono : MonoBehaviour
         //Debug.Log("update part skin: " + skin.localDress.SpineName);
         string skinName = GetSKin(skin.localDress.SpineName);
         //Debug.Log("update part skinName is : " + skinName);
-        skeletonGraphicScript.MixAndMatchSpineSkin(skinName);
+        skeletonGraphicScript.UpdateMatchSpineSkin(skinName);
     }
 
 
@@ -102,16 +101,16 @@ public class SkinUpdateMono : MonoBehaviour
     /// 获取其套装皮肤
     /// </summary>
     /// <returns></returns>
-    SkinList[] GetSkinAll()
-    {
-        List<SkinList> skinL = new List<SkinList>();
-        foreach (SkinList skin in skeletonGraphicScript.skinNames)
-        {
-            if (skin.AllName != null && skin.AllName.Equals("taozhuang"))
-            {
-                skinL.Add(skin);
-            }
-        }
-        return skinL.ToArray();
-    }
+    //SkinList[] GetSkinAll()
+    //{
+    //    List<SkinList> skinL = new List<SkinList>();
+    //    foreach (SkinList skin in skeletonGraphicScript.skinNames)
+    //    {
+    //        if (skin.AllName != null && skin.AllName.Equals("taozhuang"))
+    //        {
+    //            skinL.Add(skin);
+    //        }
+    //    }
+    //    return skinL.ToArray();
+    //}
 }

@@ -226,6 +226,8 @@ GameObject:
   - component: {fileID: 365135649}
   - component: {fileID: 365135648}
   - component: {fileID: 365135647}
+  - component: {fileID: 365135651}
+  - component: {fileID: 365135652}
   m_Layer: 0
   m_Name: Spine GameObject (character_v1)
   m_TagString: Untagged
@@ -245,8 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 58d41e8aeacb948b9b58a9fc9e91ac81, type: 2}
-  initialSkinName: langduqishi
+  skeletonDataAsset: {fileID: 11400000, guid: af38a3de26ed9b84abc2fe7c7f3b209d, type: 2}
+  initialSkinName: 
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -273,7 +275,7 @@ MonoBehaviour:
   physicsMovementRelativeTo: {fileID: 0}
   updateTiming: 1
   unscaledTime: 0
-  _animationName: guzhang
+  _animationName: aim
   loop: 1
   timeScale: 1
 --- !u!23 &365135648
@@ -296,14 +298,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f95dc0d60c25942b8bcb551eec6dfe06, type: 2}
-  - {fileID: 2100000, guid: 30e9edb05434340bba51cea93840eed1, type: 2}
-  - {fileID: 2100000, guid: f95dc0d60c25942b8bcb551eec6dfe06, type: 2}
-  - {fileID: 2100000, guid: 30e9edb05434340bba51cea93840eed1, type: 2}
-  - {fileID: 2100000, guid: f95dc0d60c25942b8bcb551eec6dfe06, type: 2}
-  - {fileID: 2100000, guid: 6554d040f2317413f8df5785605c6856, type: 2}
-  - {fileID: 2100000, guid: f95dc0d60c25942b8bcb551eec6dfe06, type: 2}
-  - {fileID: 2100000, guid: 6554d040f2317413f8df5785605c6856, type: 2}
+  - {fileID: 2100000, guid: f89bbf05902e77242a3ad20f3c927353, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -348,6 +343,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &365135651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365135646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a88072f2ccb34298881417754b3877f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sg: {fileID: 365135647}
+--- !u!114 &365135652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365135646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd49dcfdafb74c6ba5b3d87f874debc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sg: {fileID: 365135647}
+  eventName: 
 --- !u!1 &718143071
 GameObject:
   m_ObjectHideFlags: 0
