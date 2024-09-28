@@ -14,6 +14,9 @@ namespace Spine.Unity.Examples
         //人物相机
         public Camera SkeletonCamera;
 
+        //摇杆
+        public FixedJoystick fixedJoystick;
+
         //左边原点
         public GameObject CharaterLeftEndCentter;
 
@@ -74,7 +77,7 @@ namespace Spine.Unity.Examples
             StartCoroutine(WaitUntilStopped(collision));
         }
 
-     
+
         //恢复
         IEnumerator WaitUntilStopped(Collision2D collision)
         {
@@ -116,6 +119,23 @@ namespace Spine.Unity.Examples
         void Update()
         {
 
+            //float horizontal = fixedJoystick.Horizontal;
+            float horizontal = Input.GetAxis("Horizontal");
+            if (horizontal != 0)
+            {
+                state = CharaterBodyState.Running;
+                //方向
+                skeletonGraphicScript.UpdateReverseX(horizontal < 0);
+                //移动
+                MoveSkeObjV2(horizontal < 0 ? Vector3.left : Vector3.right);
+            } else
+            {
+                state = CharaterBodyState.Idle;
+            }
+            updatState();
+
+            return;
+
             if (state == CharaterBodyState.Death) return;
 
             //鼠标的点击
@@ -128,12 +148,9 @@ namespace Spine.Unity.Examples
                 if (touch.position.y >= Screen.height - 200) return;
 
                 Vector3 chaVector = GetScreenPointByWorld(CharaterGameobject.transform.position);
-                //Debug.Log("chaVector" + chaVector);
 
                 //角色跟随相机的位置
                 Vector3 skeletonAccumulationVector3 = GetScreenPointByWorld(accumulationIndicatorObject.position);
-                //Debug.Log("skeletonAccumulationVector3 is : " + skeletonAccumulationVector3);
-                //Debug.Log("SkeletonCamera.SkeletonCamera is : " + accumulationIndicatorObject.position);
 
                 //获取点击点相对于角色位移，屏幕点击点相对于主摄像机的点击位置。
                 Vector3 touchVector2D = new Vector3(
@@ -233,6 +250,36 @@ namespace Spine.Unity.Examples
             //累计距离
             Vector3 newVC = GetScreenPointByWorld(CharaterGameobject.transform.position);
             AddDistance(newVC, chaVertor);
+        }
+
+        /// <summary>
+        /// 摇杆输入-移动角色
+        /// </summary>
+        /// <param name="vector"></param>
+        void MoveSkeObjV2(Vector3 vector)
+        {
+            Vector3 chaVertor = GetScreenPointByWorld(CharaterGameobject.transform.position);
+            Vector3 lE = GetScreenPointByWorld(CharaterLeftEndCentter.transform.position);
+            Vector3 rE = GetScreenPointByWorld(CharaterRightEndCentter.transform.position);
+            //角色移动屏幕边缘
+            if (vector.x < 0 && chaVertor.x <= lE.x || vector.x > 0 && chaVertor.x >= rE.x)
+            {
+                //targeDistance.x = 0;
+                return;
+            }
+
+            //角色基本速度
+            float baseSpeed = MoveSpeed * Time.deltaTime;
+            Vector3 chaDistanceVertor = chaVertor - lE;
+            //角色移动屏幕边缘至左半边
+            if (chaDistanceVertor.x >= Screen.width / 2 && rE.x - chaDistanceVertor.x >= Screen.width / 2) //当角色移动屏幕中心点时，控制相机跟随
+            {
+                SkeletonCamera.depth = 0;
+                Transform cameraTransform = SkeletonCamera.transform;
+                cameraTransform.transform.Translate(vector * baseSpeed);
+            }
+            //移动角色
+            CharaterGameobject.transform.Translate(vector * baseSpeed);
         }
     }
 
