@@ -25,6 +25,9 @@ namespace Spine.Unity.Examples
         [SpineAnimation(dataField: "sg", fallbackToTextField = true)]
         public string DeathAnimation;
 
+        [SpineAnimation(dataField: "sg", fallbackToTextField = true)]
+        public string JumpAnimation;
+
         Spine.EventData eventData;
 
         //朝向
@@ -82,12 +85,16 @@ namespace Spine.Unity.Examples
             sg.AnimationState.SetAnimation(0, DeathAnimation, false);
         }
 
+        public void PlayJump(AnimationState.TrackEntryDelegate Complete)
+        {
+            //sg.AnimationState.SetAnimation(0, JumpAnimation, false);
+            TrackEntry jumpTrack = sg.AnimationState.SetAnimation(0, JumpAnimation, false);
+            jumpTrack.Complete += Complete;
+        }
 
         public void PlayIdle(bool loop = true)
         {
             sg.AnimationState.SetAnimation(0, IdleAnimation, loop);
-        }
-
-        
+        }   
     }
 }

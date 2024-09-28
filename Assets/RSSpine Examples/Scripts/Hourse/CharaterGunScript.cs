@@ -12,6 +12,9 @@ public class CharaterGunScript : MonoBehaviour
     [SpineBone(dataField: "sg")]
     public string boneName;
 
+    //骨骼
+    //public Transform BoneTransform;
+
     public AnimationReferenceAsset aim, shoot;
 
     //骨骼，由`boneName`在sg获取的骨骼对象
@@ -20,6 +23,9 @@ public class CharaterGunScript : MonoBehaviour
     public AudioSource gunSource;
 
     public AudioClip audioClip;
+
+    //射击方向
+    public Vector3 DirPosition;
 
     [Header("Balance")]
     public float shootInterval = 0.12f;
@@ -38,14 +44,23 @@ public class CharaterGunScript : MonoBehaviour
     {
         if (Input.touches.Length > 0)
         {
-            Touch touch = Input.touches[0];
-            Vector3 mousePosition = touch.position;
-            Vector3 worldMousePosition = cam.ScreenToWorldPoint(mousePosition);
-            Vector3 skeletonSpacePoint = sg.transform.InverseTransformPoint(worldMousePosition);
-            skeletonSpacePoint.x *= sg.Skeleton.ScaleX;
-            skeletonSpacePoint.y *= sg.Skeleton.ScaleY;
-            bone.SetLocalPosition(skeletonSpacePoint);
+            //Touch touch = Input.touches[0];
+            //Vector3 mousePosition = touch.position;
+            //Vector3 worldMousePosition = cam.ScreenToWorldPoint(mousePosition);
+            //Vector3 skeletonSpacePoint = sg.transform.InverseTransformPoint(worldMousePosition);
+            //skeletonSpacePoint.x *= sg.Skeleton.ScaleX;
+            //skeletonSpacePoint.y *= sg.Skeleton.ScaleY;
+            //bone.SetLocalPosition(skeletonSpacePoint);
+
+            //Touch touch = Input.touches[0];
+            //Vector3 mousePosition = touch.position; 
         }
+
+        Vector3 worldMousePosition = DirPosition + transform.position;
+        Vector3 skeletonSpacePoint = sg.transform.InverseTransformPoint(worldMousePosition);
+        skeletonSpacePoint.x *= sg.Skeleton.ScaleX;
+        skeletonSpacePoint.y *= sg.Skeleton.ScaleY;
+        bone.SetLocalPosition(skeletonSpacePoint);
     }
 
     //枪口

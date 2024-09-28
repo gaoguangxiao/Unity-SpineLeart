@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Spine.Unity.Examples
 {
-    //伙伴之家角色移动、挂在角色物体，控制角色和背景移动
+    //伙伴之家角色移动、挂在角色物体，控制角色和背景移动，角色控制器的输入
     public class SkeletonMoveScript : MonoBehaviour
     {
         public float MoveSpeed = 1.0f;
@@ -90,6 +90,25 @@ namespace Spine.Unity.Examples
             skeletonGraphicScript.PlayIdle();
         }
 
+        public void OnClickPlayShoot()
+        {
+            //charaterGunScript.DirPosition = vector;
+            charaterGunScript.PlayShoot();
+        }
+
+        public void OnClickPlayJump()
+        {
+            state = CharaterBodyState.Jumping;
+            skeletonGraphicScript.PlayJump(jumpComeplete);
+
+        }
+
+        void jumpComeplete(TrackEntry trackEntry)
+        {
+            //记录状态
+            //trackEntry.Animation.Name;
+        }
+
         //}
         /// <summary>
         /// 3d坐标的游戏物体转移到2d屏幕
@@ -119,8 +138,16 @@ namespace Spine.Unity.Examples
         void Update()
         {
 
-            //float horizontal = fixedJoystick.Horizontal;
-            float horizontal = Input.GetAxis("Horizontal");
+            float horizontal = 0;
+            float vertical = 0;
+#if UNITY_IOS && !UNITY_EDITOR
+            horizontal = fixedJoystick.Horizontal;
+            vertical = fixedJoystick.Vertical;
+#elif UNITY_EDITOR
+            horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxis("Vertical");
+#endif
+
             if (horizontal != 0)
             {
                 state = CharaterBodyState.Running;
@@ -128,11 +155,26 @@ namespace Spine.Unity.Examples
                 skeletonGraphicScript.UpdateReverseX(horizontal < 0);
                 //移动
                 MoveSkeObjV2(horizontal < 0 ? Vector3.left : Vector3.right);
-            } else
+            }
+            else
             {
                 state = CharaterBodyState.Idle;
             }
+
+            //改变枪口方向
+            Vector3 vector = new Vector3(horizontal, vertical, 0);
+            charaterGunScript.DirPosition = vector;
             updatState();
+
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                OnClickPlayShoot();
+            }
+
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                OnClickPlayJump();
+            }
 
             return;
 
