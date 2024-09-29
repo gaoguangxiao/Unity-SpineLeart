@@ -2082,7 +2082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8604099649608820925, guid: df13b816a165d434ba03c086c90f4b2d, type: 3}
       propertyPath: shootInterval
-      value: 1.5
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8604099649608820925, guid: df13b816a165d434ba03c086c90f4b2d, type: 3}
       propertyPath: EnableChangeBoneLocation

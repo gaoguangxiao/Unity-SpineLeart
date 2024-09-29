@@ -45,7 +45,8 @@ public class CreateGameObject : MonoBehaviour
 
             if(RandomInterval)
             {
-                CreateInterval = Random.Range(MinCreateInterval, MinCreateInterval);
+                CreateInterval = Random.Range(MinCreateInterval, MaxCreateInterval);
+                
             }
         }
 
@@ -93,23 +94,20 @@ public class CreateGameObject : MonoBehaviour
         //skeletonControlScript.UpdateSpineSKin("moren");
 
         //脸部渲染脚本
-        FaceMono faceMono = gameObject.AddComponent<FaceMono>();
+        EnemyManager faceMono = gameObject.AddComponent<EnemyManager>();
         faceMono.Refresh(skeletonControlScript);
-        faceMono.RandomAll();
+        EnemyModel enemyModel = faceMono.RandomAll();
 
         //敌人脚本moren2、其他 4 6 8 10
         EnemyDestory enemy = gameObject.GetComponent<EnemyDestory>();
-        enemy.SetMaxBlood(10);
-        //faceMono.RandomHair();
-        //faceMono.RandomEyes();
-        //faceMono.RandomTZ();
+        enemy.SetMaxBlood(enemyModel);
 
         //游戏对象的位置
         Vector3 ori = transform.position;
         ori.z = -0.3f;
         //gameObject.transform.position = transform.position;
         gameObject.transform.position = ori;
-        Debug.Log("生成对象 gameObject is： " + ori);
+        //Debug.Log("生成对象 gameObject is： " + ori);
         //将子弹旋转
         //gameObject.transform.localEulerAngles = new Vector3(0,0,90);
         gameObject.transform.eulerAngles = this.transform.eulerAngles;

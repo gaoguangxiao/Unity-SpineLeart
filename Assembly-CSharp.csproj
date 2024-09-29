@@ -73,6 +73,7 @@
     <Compile Include="Assets/RSSpine Examples/Scripts/Action/ChildControlScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/GGXInputManager.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/BackGroundWindow.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Brick/EnemyManager.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/SpineManager/CharaterMainScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Prefab/AttackCharater/FireGGX.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/FaceMono.cs" />

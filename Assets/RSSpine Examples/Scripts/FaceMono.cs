@@ -68,6 +68,13 @@ namespace Spine.Unity.Examples
             }
         }
 
+
+        public void OnClickEvent(int index, string name)
+        {
+            skeletonControlScript.UpdateMatchSpineSkin(name);
+        }
+
+
         public void Refresh(SkeletonControlScript script)
         {
             skeletonControlScript = script;
@@ -91,55 +98,5 @@ namespace Spine.Unity.Examples
             roles.Add("yufazhanglao");
         }
 
-        public void OnClickEvent(int index, string name)
-        {
-            skeletonControlScript.UpdateMatchSpineSkin(name);
-        }
-
-
-        public void RandomAll()
-        {
-           string  str = RandomRole();
-            if (str == "moren")
-            {
-                //默认才有脸部
-                //RandomHair();
-                //RandomEyes();
-                //RandomTZ();
-            }
-        }
-
-        public string RandomRole()
-        {
-            int index = Random.Range(0, roles.Count - 1);
-            string tf = roles[index];
-            skeletonControlScript.InitSpineSKin(tf);
-            return tf;
-        }
-
-
-        //发型随机
-        public void RandomHair()
-        {
-            int index = Random.Range(0, tfls.Count - 1);
-            string tf = tfls[index];
-            skeletonControlScript.UpdateMatchSpineSkin(tf);
-        }
-
-        //眼睛随机
-        public void RandomEyes()
-        {
-            int index = Random.Range(0, eyels.Count - 1);
-            string tf = eyels[index];
-            skeletonControlScript.UpdateMatchSpineSkin(tf);
-        }
-
-        //套装随机
-        public void RandomTZ()
-        {
-            int index = Random.Range(0, tzs.Count - 1);
-            string tf = tzs[index];
-            skeletonControlScript.UpdateMatchSpineSkin(tf);
-        }
     }
 }

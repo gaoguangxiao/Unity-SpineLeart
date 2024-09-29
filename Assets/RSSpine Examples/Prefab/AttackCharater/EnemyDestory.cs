@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
 public class EnemyDestory : MonoBehaviour
 {
-    int count = 1;
+    public EnemyModel enemyModel;
 
-    int maxCount = 2;
+    int count = 0;
+
+    float maxCount = 1.0f;
 
     //size：控制滑块的大小
     public Scrollbar BloodScrollbar;
@@ -16,14 +20,14 @@ public class EnemyDestory : MonoBehaviour
 
     private void Start()
     {
-        SetMaxBlood(maxCount);
+        //SetMaxBlood(maxCount);
     }
 
-    public void SetMaxBlood(int blood)
+    public void SetMaxBlood(EnemyModel enemy)
     {
-        maxCount = blood;
+        enemyModel = enemy;
         //BloodScrollbar.size = blood;
-        Debug.Log("BloodScrollbar.size is:" + BloodScrollbar.size);
+        //Debug.Log("BloodScrollbar.size is:" + BloodScrollbar.size);
     }
 
     //销毁
@@ -43,13 +47,17 @@ public class EnemyDestory : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            count += 1;
+            enemyModel.CurrentBlood += 1;
             UpdateTxt();
             Destroy(collision.gameObject);
 
+            float pro = enemyModel.CurrentBlood / enemyModel.MaxBlood;
+
+            if (pro == 1) enemyModel.death = true;
+            //Debug.Log("BloodScrollbar.size is:" + count + "pro is： " + pro);
             //value：当前滑块的值 介于0-1之间
             //size、滑块的大小
-            BloodScrollbar.size = count/maxCount;
+            BloodScrollbar.size = pro;
         }
 
         if (collision.gameObject.CompareTag("Border"))
@@ -57,7 +65,7 @@ public class EnemyDestory : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (count >= maxCount) Destroy(gameObject);
+        if (enemyModel.death) Destroy(gameObject);
     }
 
     void UpdateTxt()

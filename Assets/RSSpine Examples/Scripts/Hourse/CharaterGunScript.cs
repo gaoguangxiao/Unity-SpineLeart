@@ -31,6 +31,8 @@ public class CharaterGunScript : MonoBehaviour
     public Vector3 DirPosition;
 
     [Header("Balance")]
+
+    //射击速度
     public float shootInterval = 0.12f;
 
     //上次开抢时间
