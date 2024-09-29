@@ -3,7 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+public enum CharaterBodyState
+{
+    Idle,
+    Running,
+    Death,
+    Jumping
+}
 
+//对某个角色动作皮肤的
 namespace Spine.Unity.Examples
 {
     //伙伴之家角色移动声音。脚步带粒子效果
@@ -26,6 +34,21 @@ namespace Spine.Unity.Examples
         public string DeathAnimation;
 
         Spine.EventData eventData;
+
+        //角色状态
+        public CharaterBodyState state = CharaterBodyState.Idle;
+
+        //角色垂直移动速度
+        public event System.Action<float> VerticalEvent;
+
+        public event System.Action<float> HorizontalEvent;
+        //角色死亡
+        public event System.Action DeathEvent;
+        //角色复活
+        public event System.Action ResurgenceEvent;
+
+        //[Range(-1f, 1f)]
+        //public float currentSpeed;
 
         //朝向
         bool FaceLeft;
@@ -58,6 +81,34 @@ namespace Spine.Unity.Examples
             {
                 EventAction(e.Data.Name);
             }
+        }
+
+        public void TryMoveToVertical(float speed)
+        {
+            VerticalEvent(speed);
+        }
+
+        public void TryMoveToHorizontal(float speed)
+        {
+            HorizontalEvent(speed);
+        }
+
+        /// <summary>
+        /// 角色重新开始
+        /// </summary>
+        public void TryResurgenceEvent()
+        {
+            state = CharaterBodyState.Idle;
+            PlayIdle();
+
+            ResurgenceEvent();
+        }
+
+        public void TryDeathEvent()
+        {
+            state = CharaterBodyState.Death;
+            PlayDeath();
+            DeathEvent();
         }
 
         /// <summary>

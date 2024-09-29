@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Spine.Unity.Examples
 {
+    
     //伙伴之家角色移动、挂在角色物体，控制角色和背景移动
     public class SkeletonMoveScript : MonoBehaviour
     {
@@ -236,11 +237,5 @@ namespace Spine.Unity.Examples
         }
     }
 
-    public enum CharaterBodyState
-    {
-        Idle,
-        Running,
-        Death,
-        Jumping
-    }
+    
 }

@@ -30,6 +30,9 @@ public class MainScript : MonoBehaviour
         StartCoroutine(LoadScene(0));
     }
 
+    /// <summary>
+    /// Demo演示
+    /// </summary>
     public void OnSampleClock() {
         //Debug.Log("OnSampleClock");
         StartCoroutine(LoadScene(1));
@@ -49,6 +52,14 @@ public class MainScript : MonoBehaviour
     public void OnDressClick()
     {
         StartCoroutine(LoadScene(2));
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void OnSampleClickV2()
+    {
+        StartCoroutine(LoadScene(4));
     }
 
     //加载完毕
