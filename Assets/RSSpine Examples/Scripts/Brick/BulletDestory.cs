@@ -1,43 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.UI;
 
-public class BulletDestory : MonoBehaviour
+
+public class BulletPro : MonoBehaviour
 {
-    int count = 0;
+    public float speed = 1;
 
-    int maxCount = 100;
-
-    public event System.Action<int> CountEvent;
-
-    //子弹销毁
-    private void OnTriggerEnter(Collider other)
+    // Start is called before the first frame update
+    void Start()
     {
-       
-        if (other.gameObject.CompareTag("Bullet"))
-        {
-            count += 1;
-            Destroy(other.gameObject);
-            UpdateTxt();
-        }
         
     }
 
-    //
-    private void OnTriggerEnter2D(Collider2D collision)
+    // Update is called once per frame
+    void Update()
     {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            count += 1;
-            Destroy(collision.gameObject);
-            UpdateTxt();
-        }
-    }
-
-    void UpdateTxt()
-    {
-        //CountEvent(count);
-        //BlowsTxt.text = "次数”：" + count;
+        //设置飞行
+        transform.Translate(Vector3.right * speed * Time.deltaTime * 5);
     }
 }

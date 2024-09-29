@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+/// 场景控制器脚本
 namespace Spine.Unity.Examples
 {
-    
-    //伙伴之家角色移动、挂在角色物体，控制角色和背景移动
+    //伙伴之家角色移动、挂在角色物体，控制角色和背景移动，角色控制器的输入
     public class SkeletonMoveScript : MonoBehaviour
     {
         public float MoveSpeed = 1.0f;
@@ -14,6 +15,9 @@ namespace Spine.Unity.Examples
 
         //人物相机
         public Camera SkeletonCamera;
+
+        //摇杆
+        public FixedJoystick fixedJoystick;
 
         //左边原点
         public GameObject CharaterLeftEndCentter;
@@ -40,9 +44,12 @@ namespace Spine.Unity.Examples
 
         public CharaterCollisionScript charaterCollisionScript;
 
-        CharaterBodyState previousViewState = CharaterBodyState.Idle;
+        //创建敌人
+        public CreateGameObject EnemyCreateGameObject;
 
-        private CharaterBodyState state = CharaterBodyState.Idle;
+        //CharaterBodyState previousViewState = CharaterBodyState.Idle;
+
+        //private CharaterBodyState state = CharaterBodyState.Idle;
 
         // Start is called before the first frame update
         void Start()
@@ -53,39 +60,60 @@ namespace Spine.Unity.Examples
 
         void HandleAnimationStateEvent(string name)
         {
-            if (state == CharaterBodyState.Running)
+            if (skeletonGraphicScript.state == CharaterBodyState.Running)
             {
                 charaterFootSoundScript.PlaySound();
             }
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        //private void OnCollisionEnter2D(Collision2D collision)
+        //{
+        //    //Debug.Log("OnCollisionEnter2D");
+
+        //    targeDistance.x = 0;
+
+        //    state = CharaterBodyState.Death;
+
+        //    updatState();
+
+        //    skeletonGraphicScript.PlayDeath();
+
+        //    //
+        //    StartCoroutine(WaitUntilStopped(collision));
+        //}
+
+
+        ////恢复
+        //IEnumerator WaitUntilStopped(Collision2D collision)
+        //{
+        //    yield return new WaitForSeconds(1.0f);
+
+        //    charaterCollisionScript.clearStone(collision);
+
+        //    state = CharaterBodyState.Idle;
+
+        //    skeletonGraphicScript.PlayIdle();
+        //}
+
+        public void OnClickPlayShoot()
         {
-            //Debug.Log("OnCollisionEnter2D");
-
-            targeDistance.x = 0;
-
-            state = CharaterBodyState.Death;
-
-            updatState();
-
-            skeletonGraphicScript.PlayDeath();
-
-            //
-            StartCoroutine(WaitUntilStopped(collision));
+            //charaterGunScript.DirPosition = vector;
+            charaterGunScript.PlayShoot();
         }
 
-     
-        //恢复
-        IEnumerator WaitUntilStopped(Collision2D collision)
+        public void OnClickPlayJump()
         {
-            yield return new WaitForSeconds(1.0f);
+            skeletonGraphicScript.PlayJump(JumpComeplete);
+        }
 
-            charaterCollisionScript.clearStone(collision);
+        void JumpComeplete(TrackEntry trackEntry)
+        {
+            //回归之前状态
+            //skeletonGraphicScript.state = skeletonGraphicScript.previousViewState;
 
-            state = CharaterBodyState.Idle;
-
-            skeletonGraphicScript.PlayIdle();
+            //Debug.Log("jumpComeplete");
+            //skeletonGraphicScript.UpdatState();
+            //trackEntry.Animation.Name;
         }
 
         //}
@@ -117,7 +145,49 @@ namespace Spine.Unity.Examples
         void Update()
         {
 
-            if (state == CharaterBodyState.Death) return;
+            float horizontal = 0;
+            float vertical = 0;
+#if UNITY_IOS && !UNITY_EDITOR
+            horizontal = fixedJoystick.Horizontal;
+            vertical = fixedJoystick.Vertical;
+#elif UNITY_EDITOR
+            horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxis("Vertical");
+#endif
+
+            if (horizontal != 0)
+            {
+                skeletonGraphicScript.state = CharaterBodyState.Running;
+                //方向
+                skeletonGraphicScript.UpdateReverseX(horizontal < 0);
+                //移动
+                MoveSkeObjV2(horizontal < 0 ? Vector3.left : Vector3.right);
+
+                //改变枪口方向 1、 -1
+                Vector3 vector = new Vector3(horizontal, vertical, 0);
+                charaterGunScript.UpdateBoneVector(vector);
+            }
+            else
+            {
+                skeletonGraphicScript.state = CharaterBodyState.Idle;
+            }
+
+            //charaterGunScript.DirPosition = vector;
+            skeletonGraphicScript.UpdatState();
+
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                OnClickPlayShoot();
+            }
+
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                OnClickPlayJump();
+            }
+
+            return;
+
+            if (skeletonGraphicScript.state == CharaterBodyState.Death) return;
 
             //鼠标的点击
             //0左键，1右键，2滚轮
@@ -129,12 +199,9 @@ namespace Spine.Unity.Examples
                 if (touch.position.y >= Screen.height - 200) return;
 
                 Vector3 chaVector = GetScreenPointByWorld(CharaterGameobject.transform.position);
-                //Debug.Log("chaVector" + chaVector);
 
                 //角色跟随相机的位置
                 Vector3 skeletonAccumulationVector3 = GetScreenPointByWorld(accumulationIndicatorObject.position);
-                //Debug.Log("skeletonAccumulationVector3 is : " + skeletonAccumulationVector3);
-                //Debug.Log("SkeletonCamera.SkeletonCamera is : " + accumulationIndicatorObject.position);
 
                 //获取点击点相对于角色位移，屏幕点击点相对于主摄像机的点击位置。
                 Vector3 touchVector2D = new Vector3(
@@ -155,7 +222,7 @@ namespace Spine.Unity.Examples
 
             if (targeDistance.x != 0)
             {
-                state = CharaterBodyState.Running;
+                skeletonGraphicScript.state = CharaterBodyState.Running;
                 //方向
                 skeletonGraphicScript.UpdateReverseX(targeDistance.x < 0);
                 //移动
@@ -163,29 +230,29 @@ namespace Spine.Unity.Examples
             }
             else
             {
-                state = CharaterBodyState.Idle;
+                skeletonGraphicScript.state = CharaterBodyState.Idle;
             }
 
-            updatState();
+            //updatState();
         }
 
-        void updatState()
-        {
-            if (previousViewState != state)
-            {
-                if (state == CharaterBodyState.Running)
-                {
-                    //Debug.Log("PlayRun");
-                    skeletonGraphicScript.PlayRun();
-                }
-                else
-                {
-                    //Debug.Log("playaniam");
-                    skeletonGraphicScript.PlayIdle();
-                }
-                previousViewState = state;
-            }
-        }
+        //void updatState()
+        //{
+        //    if (skeletonGraphicScript.previousViewState != skeletonGraphicScript.state)
+        //    {
+        //        if (skeletonGraphicScript.state == CharaterBodyState.Running)
+        //        {
+        //            //Debug.Log("PlayRun");
+        //            skeletonGraphicScript.PlayRun();
+        //        }
+        //        else
+        //        {
+        //            //Debug.Log("playaniam");
+        //            skeletonGraphicScript.PlayIdle();
+        //        }
+        //        skeletonGraphicScript.previousViewState = skeletonGraphicScript.state;
+        //    }
+        //}
 
         //右
         void AddDistance(Vector3 v1, Vector3 v2)
@@ -234,6 +301,36 @@ namespace Spine.Unity.Examples
             //累计距离
             Vector3 newVC = GetScreenPointByWorld(CharaterGameobject.transform.position);
             AddDistance(newVC, chaVertor);
+        }
+
+        /// <summary>
+        /// 摇杆输入-移动角色
+        /// </summary>
+        /// <param name="vector"></param>
+        void MoveSkeObjV2(Vector3 vector)
+        {
+            Vector3 chaVertor = GetScreenPointByWorld(CharaterGameobject.transform.position);
+            Vector3 lE = GetScreenPointByWorld(CharaterLeftEndCentter.transform.position);
+            Vector3 rE = GetScreenPointByWorld(CharaterRightEndCentter.transform.position);
+            //角色移动屏幕边缘
+            if (vector.x < 0 && chaVertor.x <= lE.x || vector.x > 0 && chaVertor.x >= rE.x)
+            {
+                //targeDistance.x = 0;
+                return;
+            }
+
+            //角色基本速度
+            float baseSpeed = MoveSpeed * Time.deltaTime;
+            Vector3 chaDistanceVertor = chaVertor - lE;
+            //角色移动屏幕边缘至左半边
+            if (chaDistanceVertor.x >= Screen.width / 2 && rE.x - chaDistanceVertor.x >= Screen.width / 2) //当角色移动屏幕中心点时，控制相机跟随
+            {
+                SkeletonCamera.depth = 0;
+                Transform cameraTransform = SkeletonCamera.transform;
+                cameraTransform.transform.Translate(vector * baseSpeed);
+            }
+            //移动角色
+            CharaterGameobject.transform.Translate(vector * baseSpeed);
         }
     }
 
