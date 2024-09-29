@@ -31,7 +31,49 @@ namespace Spine.Unity.Examples
         // Start is called before the first frame update
         void Start()
         {
+            if (skeletonControlScript == null) return;
+
+            Refresh(skeletonControlScript);
+
+            if (changePanelScript)
+            {
+                changePanelScript.LoopList = tfls;
+                changePanelScript.action += OnClickEvent;
+            }
+
+            if (mmPanelScript)
+            {
+                mmPanelScript.LoopList = mmls;
+                mmPanelScript.action += OnClickEvent;
+            }
+
+            if (bzPanelScript)
+            {
+                bzPanelScript.LoopList = nosels;
+                bzPanelScript.action = OnClickEvent;
+            }
+
+            if (yjPanelScript)
+            {
+
+
+                yjPanelScript.LoopList = eyels;
+                yjPanelScript.action = OnClickEvent;
+            }
+
+            if (fsPanelScript)
+            {
+                fsPanelScript.LoopList = skinColorls;
+                fsPanelScript.action = OnClickEvent;
+            }
+        }
+
+        public void Refresh(SkeletonControlScript script)
+        {
+            skeletonControlScript = script;
+
             var SkinList = skeletonControlScript.skinNames;
+
             for (int i = 0; i < SkinList.Length; i++)
             {
                 SkinList skin = SkinList[i];
@@ -41,26 +83,19 @@ namespace Spine.Unity.Examples
                 if (skin.Name.Contains("meimao")) mmls.Add(skin.Name);
                 if (skin.Name.Contains("yan")) eyels.Add(skin.Name);
             }
-
-            changePanelScript.LoopList = tfls;
-            changePanelScript.action += OnClickEvent;
-
-            mmPanelScript.LoopList = mmls;
-            mmPanelScript.action += OnClickEvent;
-
-            bzPanelScript.LoopList = nosels;
-            bzPanelScript.action = OnClickEvent;
-
-            yjPanelScript.LoopList = eyels;
-            yjPanelScript.action = OnClickEvent;
-
-            fsPanelScript.LoopList = skinColorls;
-            fsPanelScript.action = OnClickEvent;
         }
 
         public void OnClickEvent(int index, string name)
         {
             skeletonControlScript.UpdateMatchSpineSkin(name);
+        }
+
+        //发型随机
+        public void RandomHair()
+        {
+            int index = Random.Range(0, tfls.Count - 1);
+            string tf = tfls[index];
+            skeletonControlScript.UpdateMatchSpineSkin(tf);
         }
     }
 }

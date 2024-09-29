@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using QuickType;
 
-
-
 //控制角色皮肤 动作 骨骼，外界传入对象
 namespace Spine.Unity.Examples
 {
@@ -26,6 +24,14 @@ namespace Spine.Unity.Examples
         // Start is called before the first frame update
         void Start()
         {
+            if (sg == null) return;
+            Refresh(sg);
+        }
+
+        public void Refresh(SkeletonAnimation animation)
+        {
+            sg = animation;
+
             skeletonData = sg.skeletonDataAsset.GetSkeletonData(false);
 
             InitSkinSkeletonData(skeletonData);
@@ -34,9 +40,7 @@ namespace Spine.Unity.Examples
             characterSkin = new Skin("character-base");
             characterSkin.AddSkin(skeletonData.FindSkin(sg.initialSkinName));
 
-            
         }
-
         /// <summary>
         /// 指定spine皮肤，会移除之前所有皮肤效果
         /// </summary>
@@ -56,7 +60,7 @@ namespace Spine.Unity.Examples
         /// <param name="skinName"></param>
         public void UpdateMatchSpineSkin(string skinName)
         {
-
+            //Debug.Log("更换皮肤" + skinName);
             Skin resultCombinedSkin = new Skin("character-combined");
             //Adds a new skin to the previous skin
             resultCombinedSkin.AddSkin(characterSkin);

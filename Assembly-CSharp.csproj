@@ -60,22 +60,27 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.34f1c1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/RSSpine Examples/Scripts/Brick/BulletDestory.cs" />
+    <Compile Include="Assets/Joystick Pack/Scripts/Joysticks/FixedJoystick.cs" />
+    <Compile Include="Assets/RSSpine Examples/Prefab/SkinObjScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Prefab/ChangePanelScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/MainScript.cs" />
-    <Compile Include="Assets/RSSpine Examples/ButtonPrefab/SkinObjScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/SpineManager/SkeletonGraphicScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Action/CreateButton.cs" />
-    <Compile Include="Assets/RSSpine Examples/Scripts/Brick/BulletPro.cs" />
+    <Compile Include="Assets/RSSpine Examples/Prefab/AttackCharater/EnemyDestory.cs" />
+    <Compile Include="Assets/Joystick Pack/Scripts/Joysticks/VariableJoystick.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/SpineManager/SkeletonBoneScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/CoreControll/CreateGameObject.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Action/ChildControlScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/GGXInputManager.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/BackGroundWindow.cs" />
-    <Compile Include="Assets/RSSpine Examples/Scripts/Brick/EnemyPro.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/SpineManager/CharaterMainScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Prefab/AttackCharater/FireGGX.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/FaceMono.cs" />
-    <Compile Include="Assets/RSSpine Examples/Scripts/Brick/FireGGX.cs" />
+    <Compile Include="Assets/Joystick Pack/Examples/JoystickSetterExample.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Net/DressNetScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/SkinUpdateMono.cs" />
+    <Compile Include="Assets/RSSpine Examples/Prefab/GXButtonScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Prefab/AttackCharater/GGXBorderDestory.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/CharaterGunScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/SkeletonMoveScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/CoreControll/CharaterInputScript.cs" />
@@ -83,18 +88,21 @@
     <Compile Include="Assets/RSSpine Examples/Scripts/Demo/TypeMono.cs" />
     <Compile Include="Assets/RSSpine Examples/NetWork/RSResponseScriptV2.cs" />
     <Compile Include="Assets/MecanimScript.cs" />
+    <Compile Include="Assets/Joystick Pack/Scripts/Joysticks/FloatingJoystick.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Brick/BrickMainScript.cs" />
     <Compile Include="Assets/RSSpine Examples/NetWork/ResponseScript.cs" />
+    <Compile Include="Assets/Joystick Pack/Scripts/Joysticks/DynamicJoystick.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/CharaterFootSoundScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/Upgrade.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/CharaterCollisionScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Net/CharacterScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Prefab/AttackCharater/GGXMovePro.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Demo/CharacterPannelMono.cs" />
-    <Compile Include="Assets/RSSpine Examples/ButtonPrefab/GXButtonScript.cs" />
+    <Compile Include="Assets/Joystick Pack/Scripts/Base/Joystick.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/SpineManager/SpineAssetsManeger.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/SpineManager/SkeletonControlScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Brick/CharaterDestory.cs" />
-    <Compile Include="Assets/RSSpine Examples/ButtonPrefab/ChangePanelScript.cs" />
+    <Compile Include="Assets/Joystick Pack/Examples/JoystickPlayerExample.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/CoreControll/DestoryGameObject.cs" />
   </ItemGroup>
   <ItemGroup>

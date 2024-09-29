@@ -38,6 +38,9 @@ namespace Spine.Unity.Examples
 
         Spine.EventData eventData;
 
+        //之前状态
+        public CharaterBodyState previousViewState = CharaterBodyState.Idle;
+
         //角色状态
         public CharaterBodyState state = CharaterBodyState.Idle;
 
@@ -138,7 +141,7 @@ namespace Spine.Unity.Examples
 
         public void PlayJump(AnimationState.TrackEntryDelegate Complete)
         {
-            //sg.AnimationState.SetAnimation(0, JumpAnimation, false);
+            state = CharaterBodyState.Jumping;
             TrackEntry jumpTrack = sg.AnimationState.SetAnimation(0, JumpAnimation, false);
             jumpTrack.Complete += Complete;
         }
@@ -146,6 +149,29 @@ namespace Spine.Unity.Examples
         public void PlayIdle(bool loop = true)
         {
             sg.AnimationState.SetAnimation(0, IdleAnimation, loop);
-        }   
+        }
+
+        public void UpdatState()
+        {
+            if (previousViewState != state)
+            {
+                if (state == CharaterBodyState.Running)
+                {
+                    //Debug.Log("PlayRun");
+                    PlayRun();
+                }
+                else if (state == CharaterBodyState.Jumping)
+                {
+                    //Debug.Log("PlayRun");
+                    //PlayJump();
+                }
+                else
+                {
+                    //Debug.Log("playaniam");
+                    PlayIdle();
+                }
+                previousViewState = state;
+            }
+        }
     }
 }

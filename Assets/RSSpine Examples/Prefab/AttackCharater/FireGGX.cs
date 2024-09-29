@@ -13,6 +13,8 @@ public class FireGGX : MonoBehaviour
     public Transform firePoint;
     //定义子弹方向炮塔的炮管
     public Transform cannonAngle;
+    ///开火方向，子弹移动方向
+    public Vector3 fireDirection = new Vector3(1, 0, 0);
     //定义对象速度
     public float BulletSpeed = 1.0f;
     // Start is called before the first frame update
@@ -33,7 +35,13 @@ public class FireGGX : MonoBehaviour
         //Debug.Log("生成子弹");
         //根据某预制体和父类 实例化游戏对象
         GameObject gameObject = Object.Instantiate(bulletPrefab, bulletFolder);
-        gameObject.GetComponent<BulletPro>().speed = BulletSpeed;
+
+        GGXMovePro gGX = gameObject.GetComponent<GGXMovePro>();
+
+        gGX.speed = BulletSpeed;
+        gGX.diretionVector = fireDirection;
+        //Debug.Log("fireDirection" + fireDirection);
+
         //Debug.Log("射击子弹 + " + firePoint.position);
         //游戏对象的位置
         gameObject.transform.position = firePoint.position;

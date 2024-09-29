@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 4238335058039877037}
   - component: {fileID: 1889154955657957856}
   - component: {fileID: 9220166125154219563}
-  - component: {fileID: 8765176906903654108}
   - component: {fileID: 6949998455544354917}
   - component: {fileID: 3706097144934266086}
+  - component: {fileID: 949352663647611777}
+  - component: {fileID: 1702844180187206091}
   m_Layer: 0
   m_Name: "\u5B50\u5F39"
   m_TagString: Bullet
@@ -86,19 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8765176906903654108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1505181780539512821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54dcb43348fd24fd689ad5459c9fc6e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1.5
 --- !u!136 &6949998455544354917
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -149,3 +137,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &949352663647611777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505181780539512821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128aab229752b485fbf7fde5e484dcee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2.5
+  diretionVector: {x: 1, y: 0, z: 0}
+--- !u!114 &1702844180187206091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505181780539512821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c519ce2d0c742aa9e34f1345291860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -30,7 +30,7 @@ public class CharaterDestory : MonoBehaviour
     //恢复游戏
     IEnumerator WaitUntilStopped(Collider collision)
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2.0f);
 
         IsGameOver = false;
         

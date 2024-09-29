@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spine-csharp", "spine-csharp.csproj", "{A6AA8815-4FF3-4C6F-6C79-5B2776569807}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{4F845988-2FB7-2F98-AB6F-2335CAF6007F}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spine-unity-examples-editor", "spine-unity-examples-editor.csproj", "{5781ECA5-8C7C-36A1-9D38-973FC54CD1BC}"
 EndProject
 Global
@@ -39,6 +41,10 @@ Global
 		{A6AA8815-4FF3-4C6F-6C79-5B2776569807}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6AA8815-4FF3-4C6F-6C79-5B2776569807}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6AA8815-4FF3-4C6F-6C79-5B2776569807}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F845988-2FB7-2F98-AB6F-2335CAF6007F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F845988-2FB7-2F98-AB6F-2335CAF6007F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F845988-2FB7-2F98-AB6F-2335CAF6007F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F845988-2FB7-2F98-AB6F-2335CAF6007F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5781ECA5-8C7C-36A1-9D38-973FC54CD1BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5781ECA5-8C7C-36A1-9D38-973FC54CD1BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5781ECA5-8C7C-36A1-9D38-973FC54CD1BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
