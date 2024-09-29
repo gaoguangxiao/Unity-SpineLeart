@@ -41,6 +41,14 @@ namespace Spine.Unity.Examples
             characterSkin.AddSkin(skeletonData.FindSkin(sg.initialSkinName));
 
         }
+
+        public void InitSpineSKin(string skinName)
+        {
+            sg.initialSkinName = skinName;
+            UpdateCharaterSkin(skinName);
+            UpdateCombinedSkin(characterSkin);
+        }
+
         /// <summary>
         /// 指定spine皮肤，会移除之前所有皮肤效果
         /// </summary>

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.UI;
+using UnityEngine.UI;
 
 public class EnemyDestory : MonoBehaviour
 {
@@ -9,7 +9,22 @@ public class EnemyDestory : MonoBehaviour
 
     int maxCount = 2;
 
+    //size：控制滑块的大小
+    public Scrollbar BloodScrollbar;
+
     public event System.Action<int> CountEvent;
+
+    private void Start()
+    {
+        SetMaxBlood(maxCount);
+    }
+
+    public void SetMaxBlood(int blood)
+    {
+        maxCount = blood;
+        //BloodScrollbar.size = blood;
+        Debug.Log("BloodScrollbar.size is:" + BloodScrollbar.size);
+    }
 
     //销毁
     private void OnTriggerEnter(Collider other)
@@ -31,6 +46,10 @@ public class EnemyDestory : MonoBehaviour
             count += 1;
             UpdateTxt();
             Destroy(collision.gameObject);
+
+            //value：当前滑块的值 介于0-1之间
+            //size、滑块的大小
+            BloodScrollbar.size = count/maxCount;
         }
 
         if (collision.gameObject.CompareTag("Border"))

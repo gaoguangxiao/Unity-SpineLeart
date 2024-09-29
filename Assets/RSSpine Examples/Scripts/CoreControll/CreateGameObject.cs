@@ -17,7 +17,13 @@ public class CreateGameObject : MonoBehaviour
     [DefaultValue(1.0f)]
     public float CreateInterval = 1.0f;
 
-    //上次开抢时间
+    public bool RandomInterval = false;
+    //增加最小
+    public float MinCreateInterval = 1.0f;
+    //随机范围
+    public float MaxCreateInterval = 3.0f;
+    
+    //上次构建时间
     float lastCreateTime;
 
     // Start is called before the first frame update
@@ -35,7 +41,13 @@ public class CreateGameObject : MonoBehaviour
         float currentTime = Time.time;
         if (currentTime - lastCreateTime > CreateInterval) {
             lastCreateTime = currentTime;
-            CreateRandom(); }
+            CreateRandom();
+
+            if(RandomInterval)
+            {
+                CreateInterval = Random.Range(MinCreateInterval, MinCreateInterval);
+            }
+        }
 
     }
 
@@ -66,10 +78,8 @@ public class CreateGameObject : MonoBehaviour
     public void CreateRandom()
     {
         //Debug.Log("生成对象");
-
         GameObject gameObject = Object.Instantiate(ObjectPrefab, transform);
-        gameObject.transform.position = new Vector3(0,0,-0.1f);
-        //
+        
         SkeletonAnimation skeletonAnimation = gameObject.GetComponent<SkeletonAnimation>();
 
         SkeletonDataAsset skeletonDataAsset = SpineAssetsManeger.Instance.GetSpineModel(1);
@@ -80,15 +90,26 @@ public class CreateGameObject : MonoBehaviour
         SkeletonControlScript skeletonControlScript = gameObject.AddComponent<SkeletonControlScript>();
         skeletonControlScript.Refresh(skeletonAnimation);
 
-        skeletonControlScript.UpdateSpineSKin("moren");
+        //skeletonControlScript.UpdateSpineSKin("moren");
 
         //脸部渲染脚本
         FaceMono faceMono = gameObject.AddComponent<FaceMono>();
         faceMono.Refresh(skeletonControlScript);
-        faceMono.RandomHair();
-        
+        faceMono.RandomAll();
+
+        //敌人脚本moren2、其他 4 6 8 10
+        EnemyDestory enemy = gameObject.GetComponent<EnemyDestory>();
+        enemy.SetMaxBlood(10);
+        //faceMono.RandomHair();
+        //faceMono.RandomEyes();
+        //faceMono.RandomTZ();
+
         //游戏对象的位置
-        gameObject.transform.position = transform.position;
+        Vector3 ori = transform.position;
+        ori.z = -0.3f;
+        //gameObject.transform.position = transform.position;
+        gameObject.transform.position = ori;
+        Debug.Log("生成对象 gameObject is： " + ori);
         //将子弹旋转
         //gameObject.transform.localEulerAngles = new Vector3(0,0,90);
         gameObject.transform.eulerAngles = this.transform.eulerAngles;

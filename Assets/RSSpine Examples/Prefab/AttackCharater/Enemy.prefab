@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4542088446830211872
 Transform:
   m_ObjectHideFlags: 0
@@ -46,4 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectPrefab: {fileID: 2141869884377983030, guid: 4963a1754647a422d865a41c5746da09, type: 3}
   cannonAngle: {fileID: 0}
-  CreateInterval: 1
+  CreateInterval: 1.5
+  RandomInterval: 1
+  MinCreateInterval: 1
+  MaxCreateInterval: 3
