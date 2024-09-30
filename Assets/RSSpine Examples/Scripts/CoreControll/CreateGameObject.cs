@@ -7,6 +7,9 @@ using Spine.Unity.Examples;
 
 public class CreateGameObject : MonoBehaviour
 {
+    //敌人管理器
+    public EnemyManager enemyManager;
+
     //对象预制体
     public GameObject ObjectPrefab;
     //定义子弹方向炮塔的炮管
@@ -29,6 +32,8 @@ public class CreateGameObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //enemyManager = GetComponent<EnemyManager>();
+
         //连发
         //InvokeRepeating("Fire", 1, (float)0.2);
     }
@@ -87,19 +92,21 @@ public class CreateGameObject : MonoBehaviour
         skeletonAnimation.skeletonDataAsset = skeletonDataAsset;
         skeletonAnimation.Initialize(true);//运行时初始化
 
-        //控制脚本
+        ///控制脚本-让控制脚本具备spine动作和皮肤
         SkeletonControlScript skeletonControlScript = gameObject.AddComponent<SkeletonControlScript>();
         skeletonControlScript.Refresh(skeletonAnimation);
 
-        //skeletonControlScript.UpdateSpineSKin("moren");
+        //敌人管理器-对控制脚本刷新新的角色
+        enemyManager.Refresh(skeletonControlScript);
+        EnemyModel enemyModel = enemyManager.RandomCreate();
 
-        //脸部渲染脚本
-        EnemyManager faceMono = gameObject.AddComponent<EnemyManager>();
-        faceMono.Refresh(skeletonControlScript);
-        EnemyModel enemyModel = faceMono.RandomAll();
+        //skeletonAnimation.
+        //skeletonAnimation.skeletonDataAsset = enemyManager.s.skeletonDataAsset;
+        //skeletonAnimation.Initialize(true);//运行时初始化
 
         //敌人脚本moren2、其他 4 6 8 10
         EnemyDestory enemy = gameObject.GetComponent<EnemyDestory>();
+        enemy.enemyManager = enemyManager;
         enemy.SetMaxBlood(enemyModel);
 
         //游戏对象的位置

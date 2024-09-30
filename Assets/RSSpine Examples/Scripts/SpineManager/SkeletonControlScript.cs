@@ -13,7 +13,7 @@ namespace Spine.Unity.Examples
         //记录角色之前皮肤效果
         Skin characterSkin;
 
-        SkeletonData skeletonData;
+        public SkeletonData skeletonData;
 
         //action name
         public ActionList[] animationNames = { };
@@ -33,6 +33,18 @@ namespace Spine.Unity.Examples
             sg = animation;
 
             skeletonData = sg.skeletonDataAsset.GetSkeletonData(false);
+
+            InitSkinSkeletonData(skeletonData);
+
+            //初始化默认皮肤
+            characterSkin = new Skin("character-base");
+            characterSkin.AddSkin(skeletonData.FindSkin(sg.initialSkinName));
+
+        }
+
+        public void RefreshkeletonData(SkeletonDataAsset dataAsset)
+        {
+            skeletonData = dataAsset.GetSkeletonData(false);
 
             InitSkinSkeletonData(skeletonData);
 

@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine.Unity.Examples;
 
 //角色重生和死亡
 public class CharaterDestory : MonoBehaviour
 {
-    public Spine.Unity.Examples.CharaterMainScript model;
+    CharaterMainScript model;
 
     bool IsGameOver;
+
+    private void Start()
+    {
+        model = GetComponent<CharaterMainScript>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {

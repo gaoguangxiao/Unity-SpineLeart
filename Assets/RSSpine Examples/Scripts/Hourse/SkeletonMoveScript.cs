@@ -47,15 +47,13 @@ namespace Spine.Unity.Examples
         //创建敌人
         public CreateGameObject EnemyCreateGameObject;
 
-        //CharaterBodyState previousViewState = CharaterBodyState.Idle;
-
-        //private CharaterBodyState state = CharaterBodyState.Idle;
 
         // Start is called before the first frame update
         void Start()
         {
-
             skeletonGraphicScript.EventAction += HandleAnimationStateEvent;
+            skeletonGraphicScript.DeathEvent += OnDeathEvent;
+            skeletonGraphicScript.ResurgenceEvent += OnResurgenceEvent;
         }
 
         void HandleAnimationStateEvent(string name)
@@ -66,34 +64,17 @@ namespace Spine.Unity.Examples
             }
         }
 
-        //private void OnCollisionEnter2D(Collision2D collision)
-        //{
-        //    //Debug.Log("OnCollisionEnter2D");
+        //玩家被击倒
+        void OnDeathEvent()
+        {
+            //EnemyGameOBject.StopCreate();
+            Debug.Log("OnDeathEvent");
+        }
 
-        //    targeDistance.x = 0;
-
-        //    state = CharaterBodyState.Death;
-
-        //    updatState();
-
-        //    skeletonGraphicScript.PlayDeath();
-
-        //    //
-        //    StartCoroutine(WaitUntilStopped(collision));
-        //}
-
-
-        ////恢复
-        //IEnumerator WaitUntilStopped(Collision2D collision)
-        //{
-        //    yield return new WaitForSeconds(1.0f);
-
-        //    charaterCollisionScript.clearStone(collision);
-
-        //    state = CharaterBodyState.Idle;
-
-        //    skeletonGraphicScript.PlayIdle();
-        //}
+        void OnResurgenceEvent()
+        {
+            //炸起来
+        }
 
         public void OnClickPlayShoot()
         {
@@ -108,12 +89,9 @@ namespace Spine.Unity.Examples
 
         void JumpComeplete(TrackEntry trackEntry)
         {
+            Debug.Log("JumpComeplete");
             //回归之前状态
-            //skeletonGraphicScript.state = skeletonGraphicScript.previousViewState;
-
-            //Debug.Log("jumpComeplete");
-            //skeletonGraphicScript.UpdatState();
-            //trackEntry.Animation.Name;
+            //skeletonGraphicScript.state = CharaterBodyState.Idle;
         }
 
         //}
@@ -157,9 +135,6 @@ namespace Spine.Unity.Examples
 
             if (horizontal != 0)
             {
-                skeletonGraphicScript.state = CharaterBodyState.Running;
-                //方向
-                skeletonGraphicScript.UpdateReverseX(horizontal < 0);
                 //移动
                 MoveSkeObjV2(horizontal < 0 ? Vector3.left : Vector3.right);
 
@@ -169,11 +144,8 @@ namespace Spine.Unity.Examples
             }
             else
             {
-                skeletonGraphicScript.state = CharaterBodyState.Idle;
+                skeletonGraphicScript.UpdatState(CharaterBodyState.Idle);
             }
-
-            //charaterGunScript.DirPosition = vector;
-            skeletonGraphicScript.UpdatState();
 
             if (Input.GetKeyDown(KeyCode.J))
             {
@@ -184,7 +156,6 @@ namespace Spine.Unity.Examples
             {
                 OnClickPlayJump();
             }
-
             return;
 
             if (skeletonGraphicScript.state == CharaterBodyState.Death) return;
@@ -235,24 +206,6 @@ namespace Spine.Unity.Examples
 
             //updatState();
         }
-
-        //void updatState()
-        //{
-        //    if (skeletonGraphicScript.previousViewState != skeletonGraphicScript.state)
-        //    {
-        //        if (skeletonGraphicScript.state == CharaterBodyState.Running)
-        //        {
-        //            //Debug.Log("PlayRun");
-        //            skeletonGraphicScript.PlayRun();
-        //        }
-        //        else
-        //        {
-        //            //Debug.Log("playaniam");
-        //            skeletonGraphicScript.PlayIdle();
-        //        }
-        //        skeletonGraphicScript.previousViewState = skeletonGraphicScript.state;
-        //    }
-        //}
 
         //右
         void AddDistance(Vector3 v1, Vector3 v2)
@@ -309,13 +262,15 @@ namespace Spine.Unity.Examples
         /// <param name="vector"></param>
         void MoveSkeObjV2(Vector3 vector)
         {
+            //角色状态
+            skeletonGraphicScript.UpdatState(CharaterBodyState.Running);
+
             Vector3 chaVertor = GetScreenPointByWorld(CharaterGameobject.transform.position);
             Vector3 lE = GetScreenPointByWorld(CharaterLeftEndCentter.transform.position);
             Vector3 rE = GetScreenPointByWorld(CharaterRightEndCentter.transform.position);
             //角色移动屏幕边缘
             if (vector.x < 0 && chaVertor.x <= lE.x || vector.x > 0 && chaVertor.x >= rE.x)
             {
-                //targeDistance.x = 0;
                 return;
             }
 
@@ -331,6 +286,8 @@ namespace Spine.Unity.Examples
             }
             //移动角色
             CharaterGameobject.transform.Translate(vector * baseSpeed);
+            //角色朝向
+            skeletonGraphicScript.UpdateReverseX(vector.x < 0);
         }
     }
 

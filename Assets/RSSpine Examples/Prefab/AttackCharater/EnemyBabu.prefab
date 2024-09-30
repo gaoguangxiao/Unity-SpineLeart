@@ -282,9 +282,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 3.01
-  m_Height: 10.44
+  m_Height: 13.87
   m_Direction: 1
-  m_Center: {x: 0, y: 5.2, z: 0}
+  m_Center: {x: 0, y: 6.78, z: 0}
 --- !u!54 &2780876761158315023
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c519ce2d0c742aa9e34f1345291860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyManager: {fileID: 0}
   BloodScrollbar: {fileID: 7120133133788507610}
 --- !u!1 &3407339171580687689
 GameObject:

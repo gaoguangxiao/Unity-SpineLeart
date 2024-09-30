@@ -139,11 +139,18 @@ namespace Spine.Unity.Examples
             sg.AnimationState.SetAnimation(0, DeathAnimation, false);
         }
 
-        public void PlayJump(AnimationState.TrackEntryDelegate Complete)
+        public void PlayJump(AnimationState.TrackEntryDelegate complete)
         {
             state = CharaterBodyState.Jumping;
             TrackEntry jumpTrack = sg.AnimationState.SetAnimation(0, JumpAnimation, false);
-            jumpTrack.Complete += Complete;
+            jumpTrack.Complete += JumpComplete;
+        }
+
+        void JumpComplete(TrackEntry track)
+        {
+            state = previousViewState;
+
+            PlayStateAnimation();
         }
 
         public void PlayIdle(bool loop = true)
@@ -151,27 +158,29 @@ namespace Spine.Unity.Examples
             sg.AnimationState.SetAnimation(0, IdleAnimation, loop);
         }
 
-        public void UpdatState()
+        public void UpdatState(CharaterBodyState newState)
         {
+           
+            if (state == newState) return;
+            state = newState;
+
+            //跳跃状态
+            if (state == CharaterBodyState.Jumping)
+            {
+                return;
+            }
+
             if (previousViewState != state)
             {
-                if (state == CharaterBodyState.Running)
-                {
-                    //Debug.Log("PlayRun");
-                    PlayRun();
-                }
-                else if (state == CharaterBodyState.Jumping)
-                {
-                    //Debug.Log("PlayRun");
-                    //PlayJump();
-                }
-                else
-                {
-                    //Debug.Log("playaniam");
-                    PlayIdle();
-                }
                 previousViewState = state;
+                PlayStateAnimation();
             }
+        }
+
+        public void PlayStateAnimation()
+        {
+            if (state == CharaterBodyState.Idle) PlayIdle();
+            else if (state == CharaterBodyState.Running) PlayRun();  
         }
     }
 }

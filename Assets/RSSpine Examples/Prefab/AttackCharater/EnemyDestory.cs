@@ -3,52 +3,52 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
 public class EnemyDestory : MonoBehaviour
 {
+    //引用
+    public EnemyManager enemyManager;
+
     public EnemyModel enemyModel;
-
-    int count = 0;
-
-    float maxCount = 1.0f;
 
     //size：控制滑块的大小
     public Scrollbar BloodScrollbar;
 
     public event System.Action<int> CountEvent;
 
+
     private void Start()
     {
-        //SetMaxBlood(maxCount);
+
     }
 
     public void SetMaxBlood(EnemyModel enemy)
     {
         enemyModel = enemy;
         //BloodScrollbar.size = blood;
-        //Debug.Log("BloodScrollbar.size is:" + BloodScrollbar.size);
+        //Debug.Log("enemy.MaxBlood is:" + enemy.MaxBlood);
     }
 
     //销毁
     private void OnTriggerEnter(Collider other)
     {
-        handleGameobject(other.gameObject);
+        HandleGameobject(other.gameObject);
     }
 
     //
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        handleGameobject(collision.gameObject);
+        HandleGameobject(collision.gameObject);
 
     }
 
-    void handleGameobject(GameObject collision)
+    void HandleGameobject(GameObject collision)
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
             enemyModel.CurrentBlood += 1;
             UpdateTxt();
+
+            //当对象为子弹时，销毁其对象
             Destroy(collision.gameObject);
 
             float pro = enemyModel.CurrentBlood / enemyModel.MaxBlood;
@@ -65,11 +65,16 @@ public class EnemyDestory : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (enemyModel.death) Destroy(gameObject);
+        //判断当前物体是否死亡，
+        //Debug.Log("enemyModel is" + enemyModel);
+        if (enemyModel != null && enemyModel.death)
+        {
+            enemyManager.SkillEnemy(enemyModel,gameObject);
+        }
     }
 
     void UpdateTxt()
     {
-        if (CountEvent != null) CountEvent(count);
+        //if (CountEvent != null) CountEvent(count);
     }
 }

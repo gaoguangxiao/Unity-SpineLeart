@@ -34,7 +34,7 @@ public class SpineAssetsManeger
 
     public SpineAssetsManeger()
     {
-        Debug.Log("SpineAssetsManeger init SpinePrefabsDict");
+        //Debug.Log("SpineAssetsManeger init SpinePrefabsDict");
 
         SpinePrefabsDict = new Dictionary<long, SkeletonDataAsset>();
         //npc
@@ -61,7 +61,7 @@ public class SpineAssetsManeger
         SpinePrefabsDict.Add(12, GetSkeletonDataAsset("/buddy/baojian_SkeletonData"));
         //家-窗户
         SpinePrefabsDict.Add(13, GetSkeletonDataAsset("/buddy/chuanghu_SkeletonData"));
-        Debug.Log("SpineAssetsManeger init finish,The Spine Count is: " + SpinePrefabsDict.Keys.Count);
+        //Debug.Log("SpineAssetsManeger init finish,The Spine Count is: " + SpinePrefabsDict.Keys.Count);
     }
 
     public SkeletonDataAsset GetSkeletonDataAsset(string path)

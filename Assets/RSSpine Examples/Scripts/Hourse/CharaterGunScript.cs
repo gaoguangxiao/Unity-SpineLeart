@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
 
+
 public class CharaterGunScript : MonoBehaviour
 {
     public Camera cam;
