@@ -16,13 +16,25 @@ public class MainScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        BridgeScript.CallRegisterCallBackDelegate();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateLoadingProgress();
+    }
+
+    //返回原生界面
+    public void OnBackClickNative()
+    {
+        //Debug.Log("返回原生");
+        Message message = new(MessageType.Type_plug, MessageType.UI_UnityClose, "");
+        BridgeScript.Instance.CallApp(message, async (obj) => {
+            Debug.Log("obj is:" + obj);
+        });
+
     }
 
     public void OnBackClick()
