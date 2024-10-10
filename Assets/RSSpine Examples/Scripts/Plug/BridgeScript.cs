@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using AOT;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 
 public class BridgeScript
 {
@@ -31,9 +32,11 @@ public class BridgeScript
     /// </summary>
     public static void CallRegisterCallBackDelegate()
     {
-        registerCallBackDelegate(HandleOnCallbackDelegate);
+        if (Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            registerCallBackDelegate(HandleOnCallbackDelegate);
+        }
     }
-
 
     private static AndroidJavaObject appBridge;
 
@@ -56,7 +59,7 @@ public class BridgeScript
     {
         callbackId++;
         // 组成bridge消息
-        fireEvent(callbackId, message);
+        FireEvent(callbackId, message);
     }
 
     // app 2 unity
@@ -64,7 +67,7 @@ public class BridgeScript
     {
         //BridgeCoreObject bridge = JsonConvert.DeserializeObject<BridgeCoreObject>(body);
         //BridgeCoreObject bridge = JsonUtility.FromJson<BridgeCoreObject>(body);
-        bool isExitCallBack = isExist(callbackId);
+        bool isExitCallBack = IsExist(callbackId);
         //if (!isExitCallBack)
         //{
         //    //没有此回调，为其他平台主动通知，默认通知到UI管理，
@@ -81,28 +84,37 @@ public class BridgeScript
     }
 
     // 判断回调是否存在
-    private bool isExist(double type)
+    private bool IsExist(double type)
     {
         return listeners.ContainsKey(type);
     }
 
     // 缓存事件
-    private void addEvent(double type, Message message)
+    private void AddEvent(double type, Message message)
     {
         listeners.Add(type, message);
     }
 
     // 缓存事件
-    private void fireEvent(double type, Message message)
+    private void FireEvent(double type, Message message)
     {
 
-        BridgeCoreObject<Dictionary<string, object>> request = new BridgeCoreObject<Dictionary<string, object>>();
+        BridgeObject request = new BridgeObject();
         request.action = message.Command;
         request.callbackId = (int)callbackId;
-        request.content = message.Content;
-        string body = JsonConvert.SerializeObject(request);
+        request.data = message.Content;
+        Dictionary<string, object> paramsDicts = new Dictionary<string, object>();
+        paramsDicts.Add("params", request);
+
+        string body = JsonConvert.SerializeObject(paramsDicts);
         Debug.Log("unity Call App: " + body);
 
+        if (!IsExist(type))
+        {
+            AddEvent(type, message);
+        }
+
+        //"params":request
         if (Application.platform == RuntimePlatform.IPhonePlayer)
         {
 
@@ -112,10 +124,10 @@ public class BridgeScript
         else if (Application.platform == RuntimePlatform.Android)
         {
             appBridge = new AndroidJavaObject("com.readadventure.unity.AppBridge");
-            if (!isExist(type))
-            {
-                addEvent(type, message);
-            }
+            // if (!isExist(type))
+            // {
+            //     addEvent(type, message);
+            // }
             //BridgeCoreObject<RequestBridge> request = new BridgeCoreObject<RequestBridge>();
             //request.action = message.Command;
             //request.callbackId = (int)callbackId;
@@ -126,9 +138,9 @@ public class BridgeScript
     }
 
     // 删除缓存事件
-    private void removeEvent(double type)
+    private void RemoveEvent(double type)
     {
-        bool isExitCallBack = isExist(type);
+        bool isExitCallBack = IsExist(type);
         if (isExitCallBack)
         {
             listeners.Remove(type);
@@ -139,27 +151,29 @@ public class BridgeScript
     [MonoPInvokeCallback(typeof(CallbackDelegate))]
     private static void HandleOnCallbackDelegate(string body)
     {
-        Debug.Log("ios call back" + body);
-
+        Debug.Log("ios call back： " + body);
         BridgeObject bridge = JsonUtility.FromJson<BridgeObject>(body);
 
-        var callBackMessage = BridgeScript.instance.listeners[bridge.callbackId];
+        var callBackMessage = BridgeScript.Instance.listeners[bridge.callbackId];
         if (callBackMessage == null)
         {
             //没有此回调，为其他平台主动通知，默认通知到UI管理，
-            Message message = new Message(MessageType.Type_UI, bridge.action, bridge.data);
-            MC.Instance.SendCustomMessage(message);
+            // Message message = new Message(MessageType.Type_UI, bridge.action, bridge.data);
+            // MC.Instance.SendCustomMessage(message);
         }
         else
         {
+            //Debug.Log("is exit");
+            BridgeScript.Instance.RemoveEvent(bridge.callbackId);
             //查找执行回调 解析参数
-            Message message = new Message(callBackMessage.Type, callBackMessage.Command, body);
-            MC.Instance.SendCustomMessage(message);
+            Message message = new Message(callBackMessage.Type, callBackMessage.Command, bridge.data);
+            Debug.Log("is exit");
+            // MC.Instance.SendCustomMessage(message);
         }
         //bridge.callbackId
         //通过callbackid找到
         //nsdi
         //actions[]
-        Debug.Log("ios call back");
+        //Debug.Log("ios call back");
     }
 }

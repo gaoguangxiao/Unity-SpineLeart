@@ -9,14 +9,14 @@ public class BridgeCoreObject<T>
     public string action;
     public int code;
     public string msg;
-    public string content;
-    //public T data;
+    //public string content;
+    public T data;
 }
 
 //不解析data
 public class BridgeObject
 {
-    public int callbackId;
+    public double callbackId;
     public int type;//类型
     public string action;
     public int code;
