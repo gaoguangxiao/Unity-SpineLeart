@@ -57,7 +57,7 @@ namespace Spine.Unity.Examples
         //public float currentSpeed;
 
         //朝向
-        bool FaceLeft;
+        public bool FaceLeft;
 
         //动画事件
         public Action<string> EventAction;
@@ -68,6 +68,9 @@ namespace Spine.Unity.Examples
             sg.AnimationState.Event += HandleAnimationStateEvent;
 
             eventData = sg.Skeleton.Data.FindEvent(eventName);
+
+            //
+            sg.Skeleton.ScaleX = FaceLeft? 1 : -1;
         }
 
         // Update is called once per frame

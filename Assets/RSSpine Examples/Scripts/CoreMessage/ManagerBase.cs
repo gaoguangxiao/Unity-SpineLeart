@@ -41,13 +41,14 @@ public abstract class ManagerBase
         {
             return;
         }
-        //Debug.Log("消息管理：" + message.Command + message.Type);
+        //Debug.Log("消息管理：" + message.Command + message.Type + "管理数量:" + Monos.Count);
         //Debug.Log(message.Content.ToString);
         //消息匹配，处理消息
         //查找匹配的脚本
         //Debug.Log("管理数量:" + Monos.Count);
         foreach (var mono in Monos)
         {
+            //Debug.Log("脚本:" + mono);
             mono.ReceiveMessage(message);
         }
     }
@@ -71,5 +72,5 @@ public abstract class ManagerBase
 
     //设置当前管理类接受的消息类型
     //`abstract`修饰抽象类和方法，具体实现让子类
-    public abstract byte GetMessageType();
+    public abstract int GetMessageType();
 }

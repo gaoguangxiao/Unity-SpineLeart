@@ -13,11 +13,14 @@ public class MainScript : MonoBehaviour
     public Text proText;
     private float lastProgress;
 
+    private void Awake()
+    {
+        BridgeScript.CallRegisterCallBackDelegate();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        BridgeScript.CallRegisterCallBackDelegate();
-
+       
     }
 
     // Update is called once per frame
@@ -31,10 +34,7 @@ public class MainScript : MonoBehaviour
     {
         //Debug.Log("返回原生");
         Message message = new(MessageType.Type_plug, MessageType.UI_UnityClose, "");
-        BridgeScript.Instance.CallApp(message, async (obj) => {
-            Debug.Log("obj is:" + obj);
-        });
-
+        BridgeScript.Instance.CallApp(message);
     }
 
     public void OnBackClick()
@@ -111,5 +111,19 @@ public class MainScript : MonoBehaviour
             asyncOperation.allowSceneActivation = true; // 允许激活新场景
             //lastProgress = progress;
         }
+    }
+
+    //获取原生端token相关信息
+    public void TestToken()
+    {
+        Debug.Log("TestToken");
+        Dictionary<string, object> paramsDicts = new Dictionary<string, object>();
+        paramsDicts.Add("key", "access_token");
+        paramsDicts.Add("value", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJCYXpoZkIxMCIsInV1aWQiOiI1ZDg2YThmYjhlNzU0YjVjOTlmZTQxOGViZjc3M2U0" +
+            "MCIsInRpbWVzdGFtcCI6MTcyODU0NjA1Njc5N30.IBJsvTBN7XyOMEHZEGkbQj_YH5kuHDpBpKYNCWI0xPR_-HrnuC0YdFLzP98tvvqS6MH6u3FlTsUSdxr8LdtTrg");
+        Message message = new (MessageType.Type_UI, MessageType.getStorage, paramsDicts);
+        //Message message = new Message(MessageType.Type_UI, MessageType.Net_Token, "");
+        MC.Instance.SendCustomMessage(message);
+ 
     }
 }

@@ -21,5 +21,17 @@ public class BridgeObject
     public string action;
     public int code;
     public string msg;
-    public string data;
+    public Dictionary<string, object> data;
+}
+
+//token数据存储
+public class GetStorageModel
+{
+    public string key;
+    public string value;
+
+    public class StorageKey
+    {
+        public static string AccessToken = "access_token";
+    }
 }

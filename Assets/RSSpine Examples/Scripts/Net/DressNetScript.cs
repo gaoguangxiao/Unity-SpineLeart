@@ -41,11 +41,7 @@ public class DressNetScript : MonoBehaviour
         {
             string receive = request.downloadHandler.text;
             Debug.Log(request.downloadHandler.text);
-            //解析数据并返回
-            //RSResponseV2.fa
-            //rSResponse = JsonConvert.DeserializeObject<RSResponseV2>(receive);
             rSResponse = JsonConvert.DeserializeObject<RSResponseV2<DressData>>(receive);
-
             //打印次数
             //Debug.Log("code is: " + rSResponse.Data);
             OnDataLoadComplete(rSResponse.Data);

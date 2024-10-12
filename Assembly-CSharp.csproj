@@ -68,8 +68,10 @@
     <Compile Include="Assets/RSSpine Examples/Scripts/Action/CreateButton.cs" />
     <Compile Include="Assets/RSSpine Examples/Prefab/AttackCharater/EnemyDestory.cs" />
     <Compile Include="Assets/Joystick Pack/Scripts/Joysticks/VariableJoystick.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Net/UserInfoScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/SpineManager/SkeletonBoneScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/CoreControll/CreateGameObject.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Net/NetManager.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Action/ChildControlScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/GGXInputManager.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/CoreMessage/MySingletonBase.cs" />
@@ -86,11 +88,13 @@
     <Compile Include="Assets/RSSpine Examples/Scripts/SkinUpdateMono.cs" />
     <Compile Include="Assets/RSSpine Examples/Prefab/AttackCharater/GGXBorderDestory.cs" />
     <Compile Include="Assets/RSSpine Examples/Prefab/GXButtonScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/NetWork/NetBaseScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/UILevelInfoScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/CharaterGunScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/SkeletonMoveScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/CoreControll/CharaterInputScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Plug/BridgeCoreObject.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Net/NetConfig.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Demo/ActionControl.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/CoreMessage/ManagerBase.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Demo/TypeMono.cs" />

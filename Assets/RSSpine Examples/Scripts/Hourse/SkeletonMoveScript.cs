@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// 场景控制器脚本
 namespace Spine.Unity.Examples
@@ -40,6 +41,14 @@ namespace Spine.Unity.Examples
         //脚步移动
         public CharaterFootSoundScript charaterFootSoundScript;
 
+        //人物皮肤数据
+        UserInfoScript userInfoScript;
+
+        //人物皮肤控制
+        public SkeletonControlScript skeletonControlScript;
+        
+        public Text CoinText; // 金币数量
+        public Text DiamondText; //钻石数量
         //public CharaterGunScript charaterGunScript;
         //public CharaterCollisionScript charaterCollisionScript;
 
@@ -53,8 +62,57 @@ namespace Spine.Unity.Examples
             skeletonGraphicScript.EventAction += HandleAnimationStateEvent;
             skeletonGraphicScript.DeathEvent += OnDeathEvent;
             skeletonGraphicScript.ResurgenceEvent += OnResurgenceEvent;
+
+            userInfoScript = GetComponent<UserInfoScript>();
+            userInfoScript.OnDataLoadComplete += OnDataLoadComplete;
         }
 
+        void OnDataLoadComplete(UserData userData)
+        {
+
+            CoinText.text = userData.CoinCount.ToString();
+
+            DiamondText.text = userData.DiamondCount.ToString();
+
+            //Debug.Log("userdata：" + userData.FaceContent);
+            //查头发
+            string toufa = "";
+            string toufaColor = "";
+            foreach (var item in userData.FaceContent)
+            {
+                //查找该皮肤全部名称 头发
+                if (item.Type == 1)
+                {
+                    toufa = item.SpineName;
+                }
+                else if (item.Type == 6)
+                {
+                    toufaColor = item.SpineName;
+                }
+                else if (item.Type == 3)//眼
+                {
+                    string allSpinename = "yan" + "/" + item.SpineName;
+                    skeletonControlScript.UpdateMatchSpineSkin(allSpinename);
+                }
+                else //其他部位
+                {
+
+                    string[] skins = item.SpineName.Split("_");
+                    string prefix = "";
+                    if (skins.Length >= 2)
+                    {
+                        prefix = skins[0];
+                        string allSpinename = prefix + "/" + item.SpineName;
+                        skeletonControlScript.UpdateMatchSpineSkin(allSpinename);
+                    }
+                }
+            }
+            skeletonControlScript.UpdateMatchSpineSkin("toufa/" + toufa + "_" + toufaColor);
+
+            //衣服
+            skeletonControlScript.UpdateMatchSpineSkin("taozhuang/" + userData.DressUpContent.SpineName);
+           
+        }
         void HandleAnimationStateEvent(string name)
         {
             if (skeletonGraphicScript.state == CharaterBodyState.Running)

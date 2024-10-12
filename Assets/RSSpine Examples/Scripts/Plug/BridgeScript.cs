@@ -55,7 +55,7 @@ public class BridgeScript
     }
 
     // unity 2 app
-    public void CallApp(Message message, Action<Message> response)
+    public void CallApp(Message message)
     {
         callbackId++;
         // 组成bridge消息
@@ -72,7 +72,7 @@ public class BridgeScript
         //{
         //    //没有此回调，为其他平台主动通知，默认通知到UI管理，
         //    Message message = new Message(MessageType.Type_UI, bridge.action, body);
-        //    MC.Instance.SendCustomMessage(message);
+        //    MC.Instance.SendCustomMessage(message);, Action<Message> response
         //}
         //else
         //{
@@ -102,7 +102,7 @@ public class BridgeScript
         BridgeObject request = new BridgeObject();
         request.action = message.Command;
         request.callbackId = (int)callbackId;
-        request.data = message.Content;
+        request.data = message.Data;
         Dictionary<string, object> paramsDicts = new Dictionary<string, object>();
         paramsDicts.Add("params", request);
 
@@ -124,17 +124,21 @@ public class BridgeScript
         else if (Application.platform == RuntimePlatform.Android)
         {
             appBridge = new AndroidJavaObject("com.readadventure.unity.AppBridge");
-            // if (!isExist(type))
-            // {
-            //     addEvent(type, message);
-            // }
-            //BridgeCoreObject<RequestBridge> request = new BridgeCoreObject<RequestBridge>();
-            //request.action = message.Command;
-            //request.callbackId = (int)callbackId;
-            //request.data = JsonUtility.FromJson<RequestBridge>(message.Content);
             //appBridge.Call("callApp", gameObjectName, JsonConvert.SerializeObject(request));
         }
-
+        else
+        {
+            if (message.Command == MessageType.getStorage) //其他平台处理
+            {
+                Dictionary<string, object> paramsResp = new Dictionary<string, object>();
+                paramsResp.Add("key", "access_token");
+                paramsResp.Add("value", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJCYXpoZkIxMCIsInV1aWQiOiI1ZDg2YThmYjhlNzU0YjVjOTlmZTQxOGViZjc3M2U0" +
+                    "MCIsInRpbWVzdGFtcCI6MTcyODU0NjA1Njc5N30.IBJsvTBN7XyOMEHZEGkbQj_YH5kuHDpBpKYNCWI0xPR_-HrnuC0YdFLzP98tvvqS6MH6u3FlTsUSdxr8LdtTrg");
+                Message messageparamsResp = new(MessageType.Type_UI, MessageType.getStorage, paramsResp);
+                MC.Instance.SendCustomMessage(messageparamsResp);
+                BridgeScript.Instance.RemoveEvent(type);
+            }
+        }
     }
 
     // 删除缓存事件
@@ -152,23 +156,37 @@ public class BridgeScript
     private static void HandleOnCallbackDelegate(string body)
     {
         Debug.Log("ios call back： " + body);
-        BridgeObject bridge = JsonUtility.FromJson<BridgeObject>(body);
-
+        BridgeObject bridge = JsonConvert.DeserializeObject<BridgeObject>(body); ;
+        Debug.Log("bridge call back 1： " + bridge.data);
         var callBackMessage = BridgeScript.Instance.listeners[bridge.callbackId];
         if (callBackMessage == null)
         {
-            //没有此回调，为其他平台主动通知，默认通知到UI管理，
-            // Message message = new Message(MessageType.Type_UI, bridge.action, bridge.data);
+            Debug.Log("is no exit");
+            //没有此回调，为其他平台主动通知，默认通知到UI管理
+            Message message = new Message(MessageType.Type_UI, bridge.action, bridge.data);
+
+            //获取原生端token相关信息
+            Debug.Log("action为：" + bridge.action);
             // MC.Instance.SendCustomMessage(message);
         }
         else
         {
             //Debug.Log("is exit");
-            BridgeScript.Instance.RemoveEvent(bridge.callbackId);
+
             //查找执行回调 解析参数
-            Message message = new Message(callBackMessage.Type, callBackMessage.Command, bridge.data);
-            Debug.Log("is exit");
-            // MC.Instance.SendCustomMessage(message);
+            Message message = new Message(MessageType.Type_UI, callBackMessage.Command, bridge.data);
+
+            //Dictionary<string, object> paramsResp = new Dictionary<string, object>();
+            //paramsResp.Add("key", "access_token");
+            //paramsResp.Add("value", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJCYXpoZkIxMCIsInV1aWQiOiI1ZDg2YThmYjhlNzU0YjVjOTlmZTQxOGViZjc3M2U0" +
+            //    "MCIsInRpbWVzdGFtcCI6MTcyODU0NjA1Njc5N30.IBJsvTBN7XyOMEHZEGkbQj_YH5kuHDpBpKYNCWI0xPR_-HrnuC0YdFLzP98tvvqS6MH6u3FlTsUSdxr8LdtTrg");
+            //Message messageparamsResp = new(MessageType.Type_UI, MessageType.getStorage, paramsResp);
+            //MC.Instance.SendCustomMessage(messageparamsResp);
+            //BridgeScript.Instance.RemoveEvent(type);
+            Debug.Log("is exit：" + message.Type + message.Command + message.Data);
+            MC.Instance.SendCustomMessage(message);
+
+            BridgeScript.Instance.RemoveEvent(bridge.callbackId);
         }
         //bridge.callbackId
         //通过callbackid找到
