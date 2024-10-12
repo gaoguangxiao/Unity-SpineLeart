@@ -11,7 +11,7 @@ public class BackGroundWindow : MonoBehaviour
     {
 
         //屏幕起始点
-        Vector3 dVector = Camera.main.ScreenToWorldPoint(new Vector3(0, 0 ,2));
+        Vector3 dVector = Camera.main.ScreenToWorldPoint(new Vector3(0, -5 ,2));
         LeftStartGameObject.transform.position = dVector;
     }
 

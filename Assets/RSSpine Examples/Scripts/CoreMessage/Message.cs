@@ -71,7 +71,7 @@ public class MessageType {
     //public static string Command_RecognitionEvent = "recognitionEvent";//识别结果
 
     ////音频播放
-    //public static string Command_PlayAudio = "playAudio";
+    public static string Command_PlayAudio = "playAudio";
     //public static string Command_StopAudio = "stopAudio";
     //public static string Command_PlayPlayback = "playBack";
     //public static string Command_StopPlayback = "stopPlayBack";

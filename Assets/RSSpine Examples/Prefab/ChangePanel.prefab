@@ -63,7 +63,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titleTxt: {fileID: 611776223359521757}
-  maxIndex: 2
+  LoopList: []
+  title: 
 --- !u!114 &4408598538990664815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 635.5994, y: -63.145153}
+  m_AnchoredPosition: {x: 1054.9963, y: -201.84119}
   m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6869665683604084900
@@ -406,7 +407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 96.62419, y: -63.145153}
+  m_AnchoredPosition: {x: 180.50359, y: -201.84119}
   m_SizeDelta: {x: 100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8810098266208230540

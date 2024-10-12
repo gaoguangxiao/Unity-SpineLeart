@@ -2,23 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Spine.Unity;
-
+using Spine.Unity.Examples;
 //升级
-namespace Spine.Unity.Examples
-{
+//namespace Spine.Unity.Examples
+//{
     public class Upgrade : MonoBehaviour
     {
+        //
+        //public CreateButton createButton;
 
         //家具-窗户-位置
         public GameObject FurnitureWindow;
 
-        //可升级列表
-        private CreateButton UpgradeGamePannel;
+    //可升级列表
+    public CreateButton UpgradeGamePannel;
 
-        // Start is called before the first frame update
-        void Start()
+    // Start is called before the first frame update
+    void Start()
         {
-
+            //UpgradeGamePannel.CreateSkin
         }
 
         // Update is called once per frame
@@ -50,4 +52,4 @@ namespace Spine.Unity.Examples
             
         }
     }
-}
+//}

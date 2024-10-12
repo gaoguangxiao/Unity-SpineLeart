@@ -118,7 +118,10 @@
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/CharaterAttackScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/SpineManager/SkeletonControlScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Brick/CharaterDestory.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/JumpPotionScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/ClickPositionScript.cs" />
     <Compile Include="Assets/Joystick Pack/Examples/JoystickPlayerExample.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Plug/AudioManagerScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/CoreControll/DestoryGameObject.cs" />
   </ItemGroup>
   <ItemGroup>

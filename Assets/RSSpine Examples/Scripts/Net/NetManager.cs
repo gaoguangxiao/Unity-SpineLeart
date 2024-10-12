@@ -33,6 +33,18 @@ public class NetManager: ManagerBase
     }
 
 
+    private string WebHostURL = "https://qa.risekid.cn";
+
+    public string GetWebHost()
+    {
+        return WebHostURL;
+    }
+
+    public void SetWebHost(string host)
+    {
+        WebHostURL = host;
+    }
+
     //token信息
     private string Token;
     public string GetToken()

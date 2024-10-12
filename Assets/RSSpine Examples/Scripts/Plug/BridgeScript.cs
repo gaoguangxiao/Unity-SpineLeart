@@ -175,7 +175,6 @@ public class BridgeScript
 
             //查找执行回调 解析参数
             Message message = new Message(MessageType.Type_UI, callBackMessage.Command, bridge.data);
-
             //Dictionary<string, object> paramsResp = new Dictionary<string, object>();
             //paramsResp.Add("key", "access_token");
             //paramsResp.Add("value", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJCYXpoZkIxMCIsInV1aWQiOiI1ZDg2YThmYjhlNzU0YjVjOTlmZTQxOGViZjc3M2U0" +
@@ -183,9 +182,8 @@ public class BridgeScript
             //Message messageparamsResp = new(MessageType.Type_UI, MessageType.getStorage, paramsResp);
             //MC.Instance.SendCustomMessage(messageparamsResp);
             //BridgeScript.Instance.RemoveEvent(type);
-            Debug.Log("is exit：" + message.Type + message.Command + message.Data);
+            //Debug.Log("is exit：" + message.Type + message.Command + message.Data);
             MC.Instance.SendCustomMessage(message);
-
             BridgeScript.Instance.RemoveEvent(bridge.callbackId);
         }
         //bridge.callbackId

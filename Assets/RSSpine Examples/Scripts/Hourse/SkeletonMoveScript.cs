@@ -29,6 +29,9 @@ namespace Spine.Unity.Examples
         //角色移动参照物
         public Transform accumulationIndicatorObject;
 
+        //点击位置
+        public ClickPositionScript PostionGameobjectScript;
+
         //角色待移动距离
         private Vector3 targeDistance;
 
@@ -49,13 +52,10 @@ namespace Spine.Unity.Examples
         
         public Text CoinText; // 金币数量
         public Text DiamondText; //钻石数量
-        //public CharaterGunScript charaterGunScript;
         //public CharaterCollisionScript charaterCollisionScript;
 
         //创建敌人
         //public CreateGameObject EnemyCreateGameObject;
-
-
         // Start is called before the first frame update
         void Start()
         {
@@ -65,6 +65,8 @@ namespace Spine.Unity.Examples
 
             userInfoScript = GetComponent<UserInfoScript>();
             userInfoScript.OnDataLoadComplete += OnDataLoadComplete;
+
+            
         }
 
         void OnDataLoadComplete(UserData userData)
@@ -165,6 +167,11 @@ namespace Spine.Unity.Examples
             return dVector;
         }
 
+        Vector3 GeWorldPointByScreen(Vector3 vector)
+        {
+            return Camera.main.ScreenToWorldPoint(vector);
+        }
+
         // Update is called once per frame
         void Update()
         {
@@ -223,7 +230,7 @@ namespace Spine.Unity.Examples
                 //获取点击点相对于角色位移，屏幕点击点相对于主摄像机的点击位置。
                 Vector3 touchVector2D = new Vector3(
                     skeletonAccumulationVector3.x + touch.position.x,
-                    skeletonAccumulationVector3.y + touch.position.y,
+                    skeletonAccumulationVector3.y,
                     skeletonAccumulationVector3.z);
 
                 //点击点相对于角色位移
@@ -233,6 +240,10 @@ namespace Spine.Unity.Examples
 
                 moveDistance = new Vector3();
 
+                //点击点转移至直接坐标
+                PostionGameobjectScript.transform.position = GeWorldPointByScreen(touchVector2D);
+
+                PostionGameobjectScript.ShowClickPostion(false);
                 //射击
                 //charaterGunScript.PlayShoot();
             }
@@ -244,10 +255,13 @@ namespace Spine.Unity.Examples
                 //skeletonGraphicScript.UpdateReverseX(targeDistance.x < 0);
                 //移动
                 ModeSkeObj(targeDistance.x < 0 ? Vector3.left : Vector3.right);
+
+                PostionGameobjectScript.ShowClickPostion(true);
             }
             else
             {
                 skeletonGraphicScript.UpdatState(CharaterBodyState.Idle);
+                PostionGameobjectScript.ShowClickPostion(false);
             }
 
         }
