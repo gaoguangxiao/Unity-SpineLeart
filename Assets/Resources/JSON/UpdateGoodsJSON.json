@@ -1,0 +1,47 @@
+{
+    "data": [
+        {
+            "Id": 1,
+            "goods":"https://qa.risekid.cn/static/ui-1.fef464e7.png",
+            "type":"新伙伴",
+            "name":"纳维"
+        },{
+            "Id": 2,
+            "goods":"https://qa.risekid.cn/static/ui-2.d8c341ff.png",
+            "type":"家具",
+            "name":"窗户"
+        },{
+            "Id": 4,
+            "goods":"https://qa.risekid.cn/static/ui-4.2ba0e4ef.png",
+            "type":"家具",
+            "name":"壁炉",
+            "extraInfo":"捏脸中增加更多选项"
+        },{
+            "Id": 6,
+            "goods":"https://qa.risekid.cn/static/ui-6.43fa2d4c.png",
+            "type":"家具",
+            "name":"罐子",
+            "extraInfo":"换装中增加更多可购买套装"
+        },{
+            "Id": 9,
+            "goods":"https://qa.risekid.cn/static/ui-9.d7613c1e.png",
+            "type":"新伙伴",
+            "name":"策略智者"
+        },{
+            "Id": 10,
+            "goods":"https://qa.risekid.cn/static/ui-10.4c12b3de.png",
+            "type":"家具",
+            "name":"普通衣架"
+        },{
+            "Id": 11,
+            "goods":"https://qa.risekid.cn/static/ui-11.d92d8314.png",
+            "type":"新伙伴",
+            "name":"朗读骑士"
+        },{
+            "Id": 13,
+            "goods":"https://qa.risekid.cn/static/ui-13.4bc483e7.png",
+            "type":"家具",
+            "name":"普通书柜"
+        }
+    ]
+}

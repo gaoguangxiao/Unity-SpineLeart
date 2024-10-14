@@ -43,7 +43,7 @@ public class UserInfoScript : NetBaseScript<UserData>
 
     public override void ReceiveMessage(Message message)
     {
-        Debug.Log("UserInfoScript-ReceiveMessage:" + message.Command + message.Content);
+        //Debug.Log("UserInfoScript-ReceiveMessage:" + message.Command + message.Content);
         if (message.Command == MessageType.UI_RefreshData)
         {
             RefreshData();

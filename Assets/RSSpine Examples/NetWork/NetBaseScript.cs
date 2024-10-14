@@ -7,6 +7,7 @@ public abstract class NetBaseScript<T> : MonoBase
 {
     public  RSResponseV2<T> rSResponse;//响应数据
 
+   
     public Action<T> OnDataLoadComplete;
 
 

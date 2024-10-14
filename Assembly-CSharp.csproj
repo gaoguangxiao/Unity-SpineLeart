@@ -93,6 +93,7 @@
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/CharaterGunScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/SkeletonMoveScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/CoreControll/CharaterInputScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Net/UpgradeGoodsScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Plug/BridgeCoreObject.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Net/NetConfig.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Demo/ActionControl.cs" />
@@ -106,11 +107,11 @@
     <Compile Include="Assets/Joystick Pack/Scripts/Joysticks/DynamicJoystick.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Plug/BridgeScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/CharaterFootSoundScript.cs" />
-    <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/Upgrade.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/CharaterCollisionScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/CoreMessage/NomalSingletonBase.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Net/CharacterScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Prefab/AttackCharater/GGXMovePro.cs" />
+    <Compile Include="Assets/RSSpine Examples/Prefab/Upgrade/UpgradeItemScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Demo/CharacterPannelMono.cs" />
     <Compile Include="Assets/Joystick Pack/Scripts/Base/Joystick.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/CoreMessage/Message.cs" />
@@ -119,7 +120,9 @@
     <Compile Include="Assets/RSSpine Examples/Scripts/SpineManager/SkeletonControlScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Brick/CharaterDestory.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/JumpPotionScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/Upgrade/ScollViewScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/ClickPositionScript.cs" />
+    <Compile Include="Assets/RSSpine Examples/Scripts/Hourse/UpgradePannel.cs" />
     <Compile Include="Assets/Joystick Pack/Examples/JoystickPlayerExample.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/Plug/AudioManagerScript.cs" />
     <Compile Include="Assets/RSSpine Examples/Scripts/CoreControll/DestoryGameObject.cs" />
