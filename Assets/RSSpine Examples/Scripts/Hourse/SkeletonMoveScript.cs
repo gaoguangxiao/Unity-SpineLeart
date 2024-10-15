@@ -44,7 +44,7 @@ namespace Spine.Unity.Examples
         //脚步移动
         public CharaterFootSoundScript charaterFootSoundScript;
 
-        //人物皮肤数据
+        //用户数据
         UserInfoScript userInfoScript;
 
         //人物皮肤控制
@@ -52,6 +52,8 @@ namespace Spine.Unity.Examples
         
         public Text CoinText; // 金币数量
         public Text DiamondText; //钻石数量
+
+        public bool IsPause;
         //public CharaterCollisionScript charaterCollisionScript;
 
         //创建敌人
@@ -65,8 +67,6 @@ namespace Spine.Unity.Examples
 
             userInfoScript = GetComponent<UserInfoScript>();
             userInfoScript.OnDataLoadComplete += OnDataLoadComplete;
-
-            
         }
 
         void OnDataLoadComplete(UserData userData)
@@ -153,6 +153,15 @@ namespace Spine.Unity.Examples
             //skeletonGraphicScript.state = CharaterBodyState.Idle;
         }
 
+        /// <summary>
+        /// 是否可移动
+        /// </summary>
+        /// <param name="isPause"></param>
+        public void PauseMove(bool isPause)
+        {
+            IsPause = isPause;
+        }
+
         //}
         /// <summary>
         /// 3d坐标的游戏物体转移到2d屏幕
@@ -176,42 +185,44 @@ namespace Spine.Unity.Examples
         void Update()
         {
 
-//            float horizontal = 0;
-//            float vertical = 0;
-//#if UNITY_IOS && !UNITY_EDITOR
-//            horizontal = fixedJoystick.Horizontal;
-//            vertical = fixedJoystick.Vertical;
-//#elif UNITY_EDITOR
-//            horizontal = Input.GetAxis("Horizontal");
-//            vertical = Input.GetAxis("Vertical");
-//#endif
+            //            float horizontal = 0;
+            //            float vertical = 0;
+            //#if UNITY_IOS && !UNITY_EDITOR
+            //            horizontal = fixedJoystick.Horizontal;
+            //            vertical = fixedJoystick.Vertical;
+            //#elif UNITY_EDITOR
+            //            horizontal = Input.GetAxis("Horizontal");
+            //            vertical = Input.GetAxis("Vertical");
+            //#endif
 
-//            if (horizontal != 0)
-//            {
-//                //移动
-//                MoveSkeObjV2(horizontal < 0 ? Vector3.left : Vector3.right);
+            //            if (horizontal != 0)
+            //            {
+            //                //移动
+            //                MoveSkeObjV2(horizontal < 0 ? Vector3.left : Vector3.right);
 
-//                //改变枪口方向 1、 -1
-//                Vector3 vector = new Vector3(horizontal, vertical, 0);
-//                charaterGunScript.UpdateBoneVector(vector);
-//            }
-//            else
-//            {
-//                skeletonGraphicScript.UpdatState(CharaterBodyState.Idle);
-//            }
+            //                //改变枪口方向 1、 -1
+            //                Vector3 vector = new Vector3(horizontal, vertical, 0);
+            //                charaterGunScript.UpdateBoneVector(vector);
+            //            }
+            //            else
+            //            {
+            //                skeletonGraphicScript.UpdatState(CharaterBodyState.Idle);
+            //            }
 
-//            if (Input.GetKeyDown(KeyCode.J))
-//            {
-//                OnClickPlayShoot();
-//            }
+            //            if (Input.GetKeyDown(KeyCode.J))
+            //            {
+            //                OnClickPlayShoot();
+            //            }
 
-//            if (Input.GetKeyDown(KeyCode.K))
-//            {
-//                OnClickPlayJump();
-//            }
-//            return;
+            //            if (Input.GetKeyDown(KeyCode.K))
+            //            {
+            //                OnClickPlayJump();
+            //            }
+            //            return;
 
             //if (skeletonGraphicScript.state == CharaterBodyState.Death) return;
+
+            if (IsPause) return;
 
             //鼠标的点击
             //0左键，1右键，2滚轮

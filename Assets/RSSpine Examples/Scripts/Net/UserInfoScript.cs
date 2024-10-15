@@ -32,7 +32,7 @@ public class UserInfoScript : NetBaseScript<UserData>
         else
         {
             string receive = request.downloadHandler.text;
-            Debug.Log(request.downloadHandler.text);
+            //Debug.Log(request.downloadHandler.text);
             rSResponse = JsonConvert.DeserializeObject<RSResponseV2<UserData>>(receive);
             //Debug.Log("rSResponse.data: " + rSResponse.Data);
             //Debug.Log("DressUpContent" + rSResponse.Data.DressUpContent);
@@ -111,7 +111,7 @@ public partial class UserData
     public long IsInitFinish { get; set; }
 
     [JsonProperty("buddyLevel")]
-    public long BuddyLevel { get; set; }
+    public int BuddyLevel { get; set; }
 
     [JsonProperty("dressUpContent")]
     public DressUpContent DressUpContent { get; set; }

@@ -11,16 +11,40 @@
             "type":"家具",
             "name":"窗户"
         },{
+            "Id": 3,
+            "goods":"",
+            "type":"新伙伴",
+            "name":"拼读法师",
+            "spineName":"pindufashi"
+        },{
             "Id": 4,
             "goods":"https://qa.risekid.cn/static/ui-4.2ba0e4ef.png",
             "type":"家具",
             "name":"壁炉",
             "extraInfo":"捏脸中增加更多选项"
         },{
+            "Id": 5,
+            "goods":"",
+            "type":"新伙伴",
+            "name":"词汇勇者",
+            "extraInfo":"词汇勇者"
+        },{
             "Id": 6,
             "goods":"https://qa.risekid.cn/static/ui-6.43fa2d4c.png",
             "type":"家具",
             "name":"罐子",
+            "extraInfo":"换装中增加更多可购买套装"
+        },{
+            "Id": 7,
+            "goods":"",
+            "type":"新伙伴",
+            "name":"语法长老",
+            "extraInfo":"换装中增加更多可购买套装"
+        },{
+            "Id": 8,
+            "goods":"",
+            "type":"家具",
+            "name":"普通沙发",
             "extraInfo":"换装中增加更多可购买套装"
         },{
             "Id": 9,
@@ -37,6 +61,11 @@
             "goods":"https://qa.risekid.cn/static/ui-11.d92d8314.png",
             "type":"新伙伴",
             "name":"朗读骑士"
+        },{
+            "Id": 12,
+            "goods":"",
+            "type":"家具",
+            "name":"普通桌子"
         },{
             "Id": 13,
             "goods":"https://qa.risekid.cn/static/ui-13.4bc483e7.png",

@@ -18,14 +18,17 @@ public class UpgradeGoodsModel
     [JsonProperty("name")]
     public string Name { get; set; }
 
-    public bool IsSelected;//是否选中
+    [JsonProperty("spineName")]
+    public string SpineName { get; set; }
+
+    public bool IsSelected = false;//是否选中
 }
 
 public class UpgradeItemScript : MonoBehaviour
 {
     public Image GoodsUrlBack;//物品图片
 
-    RectTransform backImageRectTransform;
+    public RectTransform backImageRectTransform;
 
     public Image GoodsUrl;//物品图片
 
@@ -37,10 +40,10 @@ public class UpgradeItemScript : MonoBehaviour
 
     public UpgradeGoodsModel LocalGoodsModel;
 
-    private void Start()
-    {
-        backImageRectTransform = GoodsUrlBack.GetComponent<RectTransform>();
-    }
+    //private void Start()
+    //{
+        
+    //}
 
     public void SetGoods(UpgradeGoodsModel goodsModel)
     {
@@ -52,11 +55,16 @@ public class UpgradeItemScript : MonoBehaviour
 
         GoodName.text = goodsModel.Name;
 
+        ReloadData();
+
+        if (string.IsNullOrEmpty(goodsModel.Goods)) return;
         StartCoroutine(LoadImage(goodsModel.Goods));
     }
 
     public void ReloadData()
     {
+        //Debug.Log("backImageRectTransform is: " + backImageRectTransform);
+
         if (LocalGoodsModel.IsSelected)
         {
             backImageRectTransform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
@@ -69,6 +77,7 @@ public class UpgradeItemScript : MonoBehaviour
 
     IEnumerator LoadImage(string imageUrl)
     {
+       
         WWW www = new WWW(imageUrl);
 
         yield return www;
@@ -81,9 +90,7 @@ public class UpgradeItemScript : MonoBehaviour
             {
                 //加载本地图片-加载网络图片
                 GoodsUrl.sprite = sprite;
-            }
-            else
-
+            } else
                 Debug.Log("load fail is：" + imageUrl);
         }
     }

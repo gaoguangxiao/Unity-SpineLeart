@@ -14,6 +14,8 @@ public class ScollViewScript : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //物品单元
     public GameObject ButtonPrefab;
 
+    private float PrefabWidth;//item width
+
     private UpgradeGoodsScript updatGoodsScript;
 
     private ScrollRect ScrollRect;
@@ -23,29 +25,17 @@ public class ScollViewScript : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //末尾增量
     private RectTransform FootRect;
 
-    //private bool isScrolling;
-
-    //private Vector2 _startDragOffset;
-
-    private UpgradeGoodsModel[] LocalGoodModels;//可选中的物品数组
     private int CurrentIndex = 1;//选中的位置
-
 
     public UpgradeGoodsModel CurrentGoodModel;//选中的物品
 
-    //public Action<UpgradeGoodsModel> OnDataScrollComplete;
+    public UserInfoScript userInfoScript;//用户数据
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject Headjv = GameObject.Instantiate(FootPrefab, ContentView.transform);
-        HeadRect = Headjv.GetComponent<RectTransform>();
-        HeadRect.sizeDelta = new Vector2(Screen.width / 2 - 150, 10);
-
-        updatGoodsScript = GetComponent<UpgradeGoodsScript>();
-        updatGoodsScript.OnDataLoadComplete += OnDataLoadComplete;
-        //获取可更新数据
-        updatGoodsScript.RefreshData();
+        PrefabWidth = ButtonPrefab.GetComponent<RectTransform>().sizeDelta.x;
+        //Debug.Log("item width is: " + PrefabWidth);
 
         ScrollRect = GetComponent<ScrollRect>();
         if (ScrollRect == null)
@@ -53,58 +43,55 @@ public class ScollViewScript : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             Debug.LogError("ScrollRect component not found!");
             return;
         }
-        //ScrollRect.onValueChanged.AddListener(OnScrollValueChanged);
+
+        //可更新物品数据
+        updatGoodsScript = GetComponent<UpgradeGoodsScript>();
+        updatGoodsScript.OnDataLoadComplete += OnDataLoadComplete;
+        updatGoodsScript.RefreshData();
+        
+        //buddyLevel
+        userInfoScript.OnDataLoadComplete += OnUserDataLoadComplete;
     }
 
-    //滚动监听
-    //滑动时调用
-    //public void OnScrollValueChanged(Vector2 position)
-    //{
-    //    //Debug.Log("Scroll Value Changed: " + position);
-    //    Vector2 sizeDelta = ScrollRect.content.sizeDelta;
-    //    float xx = position.x * (sizeDelta.x - HeadRect.sizeDelta.x - FootRect.sizeDelta.x);
-    //    //Debug.Log("Scroll Value xx: " + xx);
-    //    //int index = Mathf.CeilToInt(xx / 450.0f);//取整向0.1->1
-    //    int index = Mathf.FloorToInt(xx / 450.0f);//取整向0.1->0
+   
+    private void OnUserDataLoadComplete(UserData userData)
+    {
+        Debug.Log("伙伴之家等级：" + userData.BuddyLevel);
+        CurrentIndex = userData.BuddyLevel;
+        OnUpdateUI();
 
-    //    if (!isScrolling)
-    //    {
-    //        if (CurrentIndex == index) return;
-    //        CurrentIndex = index;
-    //        Debug.Log("Scroll Value index: " + CurrentIndex);
-    //    }
-
-    //}
+        //滚动指定位置
+        Vector2 targetPosition = new (-(CurrentIndex - 1)* PrefabWidth, 0);
+        Debug.Log("targetPosition：" + targetPosition);
+        ScrollRect.content.anchoredPosition = targetPosition;
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //_startDragOffset = ScrollRect.content.anchoredPosition;
-        Debug.Log("OnBeginDrag");
+        //Debug.Log("OnBeginDrag");
         //isScrolling = true;
     }
 
-
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
+        Debug.Log("OnEndDrag：" + ScrollRect.content.anchoredPosition);
         //isScrolling = false;
-
         float endDragOffset = Mathf.Abs(ScrollRect.content.anchoredPosition.x);
-
         //Debug.Log("Scroll Value xx: " + xx);
-        CurrentIndex = Mathf.CeilToInt(endDragOffset / 450.0f);//取整向0.1->1
-        //int index = Mathf.FloorToInt(endDragOffset / 450.0f);//取整向0.1->0
-
-        //Debug.Log("Scroll Value index: " + CurrentIndex);
-
+        CurrentIndex = Mathf.CeilToInt(endDragOffset / PrefabWidth);//取整向0.1->1
         Debug.Log("选中的物品：" + CurrentIndex);
+        OnUpdateUI();
+    }
 
+    void OnUpdateUI()
+    {
+        Debug.Log("OnUpdateUI");
         //获取选中的物品
         GameObject itemContent = ScrollRect.content.GetChild(CurrentIndex).gameObject;
         //Debug.Log("itemContent：" + itemContent);
         if (itemContent.tag != "Upgrade") return;
         UpgradeItemScript selectedScript = itemContent.GetComponent<UpgradeItemScript>();
-        Debug.Log("selectedScript：" + selectedScript.LocalGoodsModel.Name);
+        //Debug.Log("selectedScript：" + selectedScript.LocalGoodsModel.Name);
 
         for (int i = 0; i < ScrollRect.content.childCount; i++)
         {
@@ -124,38 +111,41 @@ public class ScollViewScript : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 _nomalItemScript.ReloadData();
             }
         }
-
-        OnUpdateUI(selectedScript.LocalGoodsModel);
-        //}
+        CurrentGoodModel = selectedScript.LocalGoodsModel;
+        //Debug.Log("要添加的家具：" + goodsModel.Name);
     }
-
-    void OnUpdateUI(UpgradeGoodsModel goodsModel)
-    {
-        CurrentGoodModel = goodsModel;
-        Debug.Log("要添加的家具：" + goodsModel.Name);
-    }
-
+    
     void OnDataLoadComplete(UpgradeGoodsModel[] upgradeGoods)
     {
-        LocalGoodModels = upgradeGoods;
+        //update selected item
+        CurrentIndex = userInfoScript.rSResponse.Data.BuddyLevel;
+        if (CurrentIndex - 1 <= upgradeGoods.Length)
+        {
+            CurrentGoodModel = upgradeGoods[CurrentIndex - 1];
+        }
+        Debug.Log("CurrentGoodModel is: " + CurrentGoodModel.Name);
+        
+        //inset head view
+        GameObject Headjv = GameObject.Instantiate(FootPrefab, ContentView.transform);
+        HeadRect = Headjv.GetComponent<RectTransform>();
+        HeadRect.sizeDelta = new Vector2(Screen.width / 2 - 150, 1);
+
+        //add item view
         foreach (var item in upgradeGoods)
         {
+            if (CurrentGoodModel != null && item.Id == CurrentGoodModel.Id) item.IsSelected = true;
             GameObject buttonGameObject = GameObject.Instantiate(ButtonPrefab, ContentView.transform);
             UpgradeItemScript buttonScript = buttonGameObject.GetComponent<UpgradeItemScript>();
-            //buttonGameObject.GetComponent<Button>().onClick.AddListener(() => OnClickUpgrade(item));
             buttonScript.SetGoods(item);
         }
 
+        //inset foot view
         GameObject fonjv = GameObject.Instantiate(FootPrefab, ContentView.transform);
         FootRect = fonjv.GetComponent<RectTransform>();
-        FootRect.sizeDelta = new Vector2(Screen.width / 2 - 150, 10);
+        FootRect.sizeDelta = new Vector2(Screen.width / 2 - 150, 1);
+ 
+        //scroll to posion
+        Vector2 targetPosition = new(-(CurrentIndex - 1) * PrefabWidth, 0);
+        ScrollRect.content.anchoredPosition = targetPosition;
     }
-
-    //public void OnClickUpgrade()
-    //{
-    //    Debug.Log("添加家具：" + CurrentGoodModel.Name);
-    //    if (OnDataScrollComplete != null)
-    //        OnDataScrollComplete(CurrentGoodModel);
-
-    //}
 }

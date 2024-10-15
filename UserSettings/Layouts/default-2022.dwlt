@@ -67,8 +67,8 @@ MonoBehaviour:
     y: 0
     width: 1280
     height: 680
-  m_MinSize: {x: 100, y: 121}
-  m_MaxSize: {x: 4000, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 50
+  controlID: 64
   draggingID: 0
 --- !u!114 &9
 MonoBehaviour:
@@ -476,7 +476,7 @@ MonoBehaviour:
     fitToScreenEnabled: 1
     rotationDegree: 270
     highlightSafeAreaEnabled: 0
-    friendlyName: Apple iPhone XS
+    friendlyName: Apple iPhone X
     screenIndex: 0
     networkReachability: 1
     systemLanguage: 10
@@ -836,9 +836,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1381.3273, y: 1082.6942, z: -16.681353}
+    m_Target: {x: 1218.0001, y: 562.5, z: 0}
     speed: 2
-    m_Value: {x: 1381.3273, y: 1082.6942, z: -16.681353}
+    m_Value: {x: 1218.0001, y: 562.5, z: 0}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -888,9 +888,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 2060.8816
+    m_Target: 1341.6149
     speed: 2
-    m_Value: 2060.8816
+    m_Value: 1341.6149
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -908,7 +908,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: 0.18285361, y: 0.07953833, z: -0.014843583, w: 0.979805}
+  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -1021,10 +1021,10 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 60}
-      m_SelectedIDs: 1ef5ffff
-      m_LastClickedID: -2786
-      m_ExpandedIDs: 0a5effff125effff9875ffffeedcffffc0e4ffffd2e7ffffacf4ffffe2f4fffff0f4ffff0af5ffff1ef5ffff88f6ffff2cfbffffd25f0000fc5f0000f8600000
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: d25f0000
+      m_LastClickedID: 24530
+      m_ExpandedIDs: 34faf9ff3cfaf9ff42faf9ff66faf9ff062afafff26cfcff2cfbffffd25f00000c6000001460000052600000966000009c600000c860000020610000526100005a6100007e610000fc610000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1093,7 +1093,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/RSSpine Examples/Prefab/Upgrade
+    - Assets/RSSpine Examples/Scripts/Hourse/Upgrade
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1101,16 +1101,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/RSSpine Examples/Prefab/Upgrade
+  - Assets/RSSpine Examples/Scripts/Hourse/Upgrade
   m_LastFoldersGridSize: 16
   m_LastProjectPath: /Users/gaoguangxiao/Documents/GitHub/Unity-SpineLeart
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 191}
-    m_SelectedIDs: d0720000
-    m_LastClickedID: 29392
-    m_ExpandedIDs: 000000007e63000080630000826300008463000086630000886300008a6300008c6300008e6300009063000094630000086e0000186e000000ca9a3b
+    scrollPos: {x: 0, y: 273.99957}
+    m_SelectedIDs: ec120100
+    m_LastClickedID: 70380
+    m_ExpandedIDs: 00000000726400007464000076640000786400007a6400007c6400007e6400008064000082640000846400008664000088640000f46e0000126f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1138,7 +1138,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000007e63000080630000826300008463000086630000886300008a6300008c6300008e630000906300009263000094630000
+    m_ExpandedIDs: 00000000726400007464000076640000786400007a6400007c6400007e6400008064000082640000846400008664000088640000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1166,21 +1166,21 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: 2cc3000096bf000098bf0000d89100001e4801005291000026600000cc7300008c5d0000d273000016750000e6840100e2840100fa8401003e5e0000a893000000000000be5e00005e5e0000de600000b0620000006a0000
+    m_ExpandedInstanceIDs: 2cc3000096bf000098bf0000d89100001e4801005291000026600000cc7300008c5d0000d273000016750000e6840100e2840100fa8401003e5e0000a8930000be5e00005e5e0000de600000b0620000006a00000000000078630000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: UpgradePannel
+      m_OriginalName: UpgradePannel
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 190530
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 14}
     m_CreateAssetUtility:
@@ -1235,7 +1235,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 252.29999
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
