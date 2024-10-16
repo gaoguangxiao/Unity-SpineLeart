@@ -12,9 +12,6 @@ public class HourseUpgradeScript : MonoBehaviour
     void Start()
     {
         userInfoScript.OnDataLoadComplete += OnUserDataLoadComplete;
-
-
-        //transform.GetChild();
     }
 
     // Update is called once per frame
@@ -25,59 +22,68 @@ public class HourseUpgradeScript : MonoBehaviour
 
     private void OnUserDataLoadComplete(UserData userData)
     {
-
         CurrentBuddyLevel = userData.BuddyLevel;
-
         CurrentBuddyLevel = 30;
-
         Debug.Log("伙伴之家等级：" + CurrentBuddyLevel);
 
         //获取环境可加载等级名称
         int childCount = transform.childCount;
-        Debug.Log("child count is: " + childCount);
+        //Debug.Log("child count is: " + childCount);
 
-        for (int i = 0; i < childCount; i++)
+        for (int i = 0; i < CurrentBuddyLevel; i++)
         {
-            GameObject itemContent = transform.GetChild(i).gameObject;
-
-            if (int.TryParse(itemContent.name, out int nameKey))
+            if(i < childCount)//25
             {
-                if (nameKey <= CurrentBuddyLevel)
+                Debug.Log("i is: " + i);
+                GameObject itemContent = transform.GetChild(i).gameObject;
+
+                if (int.TryParse(itemContent.name, out int nameKey))
                 {
-                    Debug.Log("level name：" + nameKey);
-                    if (nameKey == 1) CreateCharaterSkeleton(4, itemContent);
-                    else if (nameKey == 2) CreateBuddySkeleton(13, itemContent, "chuanghu");
-                    else if (nameKey == 3) CreateCharaterSkeleton(1, itemContent, "pindufashi");
-                    else if (nameKey == 4) CreateBuddySkeleton(12, itemContent, "bilu");
-                    else if (nameKey == 5) CreateCharaterSkeleton(1, itemContent, "cihuiyongzhe");
-                    else if (nameKey == 6) CreateBuddySkeleton(14, itemContent, "guanzi");
-                    else if (nameKey == 7) CreateCharaterSkeleton(1, itemContent, "yufazhanglao");
-                    else if (nameKey == 8) CreateBuddyIamge(nameKey, itemContent, "Frame 20");//普通沙发Frame 20
-                    else if (nameKey == 9) CreateCharaterSkeleton(1, itemContent, "celuezhizhe");
+                    if (nameKey <= CurrentBuddyLevel)
+                    {
+                        //Debug.Log("level name：" + nameKey);
+                        if (nameKey == 1) CreateCharaterSkeleton(4, itemContent);
+                        else if (nameKey == 2) CreateBuddySkeleton(13, itemContent, "chuanghu");
+                        else if (nameKey == 3) CreateCharaterSkeleton(1, itemContent, "pindufashi");
+                        else if (nameKey == 4) CreateBuddySkeleton(12, itemContent, "bilu");
+                        else if (nameKey == 5) CreateCharaterSkeleton(1, itemContent, "cihuiyongzhe");
+                        else if (nameKey == 6) CreateBuddySkeleton(14, itemContent, "guanzi");
+                        else if (nameKey == 7) CreateCharaterSkeleton(1, itemContent, "yufazhanglao");
+                        else if (nameKey == 8) CreateBuddyIamge(nameKey, itemContent, "Frame 20");//普通沙发Frame 20
+                        else if (nameKey == 9) CreateCharaterSkeleton(1, itemContent, "celuezhizhe");
+                        else if (nameKey == 10) CreateBuddyIamge(nameKey, itemContent, "Frame 23");//普通衣架
+                        else if (nameKey == 11) CreateCharaterSkeleton(1, itemContent, "langduqishi");
+                        else if (nameKey == 12) CreateBuddyIamge(nameKey, itemContent, "Frame 35");//普通桌子
+                        else if (nameKey == 16) CreateBuddySkeleton(15, itemContent, "quanjizhu");
+                        else if (nameKey == 17) CreateBuddySkeletonV2("fazhang_SkeletonData", itemContent, "fazhang");
+                        else if (nameKey == 18) CreateBuddySkeletonV2("mofashu_SkeletonData", itemContent, "bandu");
+                        else if (nameKey == 19) CreateBuddySkeletonV2("baojian_SkeletonData", itemContent, "baojian");
+                        else if (itemContent.tag == "Upgrade")
+                        {
+                            CreateBuddyIamge(nameKey, itemContent, "Frame_" + nameKey);
+                        }
+                    }
                 }
             }
-            else
-            {
-                //Debug.Log("转换失败");
-            }
             
-        }
 
+            //复用的家具
+            if (i == 21)
+            {
+                GameObject itemContent8 = transform.GetChild(10).gameObject;
+                CreateBuddyIamge(10, itemContent8, "Frame_21");//高级衣架
+            }
+
+        }
     }
 
     //
     void CreateBuddyIamge(int Id, GameObject posiotnPosition, string imageName)
     {
-        //Debug.Log("imageName is: " + imageName);
         //new GameObject(Id).AddComponent
         SpriteRenderer sr = new GameObject(imageName).AddComponent<SpriteRenderer>();
         var path = "Static/jiaju/" + imageName;
-
-        //Debug.Log("path is: " + path);
-
         Sprite sprite = Resources.Load<Sprite>(path);
-
-        //Debug.Log("sprite is: " + sprite);
 
         sr.sprite = sprite;
 
@@ -104,7 +110,18 @@ public class HourseUpgradeScript : MonoBehaviour
     /// <param name="animaiionName"></param>
     void CreateBuddySkeleton(int Id, GameObject posiotnPosition, string animaiionName)
     {
+        //SkeletonDataAsset asset = Resources.Load<SkeletonDataAsset>("Spine Skeletons/buddy/" + path);
+
         SkeletonDataAsset asset = SpineAssetsManeger.Instance.GetSpineModel(Id);
+        SkeletonAnimation sg = OnInitAsset(asset, posiotnPosition);
+        sg.AnimationState.SetAnimation(0, animaiionName, true);
+    }
+
+    void CreateBuddySkeletonV2(string path, GameObject posiotnPosition, string animaiionName)
+    {
+        SkeletonDataAsset asset = Resources.Load<SkeletonDataAsset>("Spine Skeletons/buddy/" + path);
+
+        //SkeletonDataAsset asset = SpineAssetsManeger.Instance.GetSpineModel(Id);
         SkeletonAnimation sg = OnInitAsset(asset, posiotnPosition);
         sg.AnimationState.SetAnimation(0, animaiionName, true);
     }
@@ -119,4 +136,6 @@ public class HourseUpgradeScript : MonoBehaviour
         sg.skeleton.SetSlotsToSetupPose();
         return sg;
     }
+
+    
 }

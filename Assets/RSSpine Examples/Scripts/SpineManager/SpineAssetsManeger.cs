@@ -63,6 +63,8 @@ public class SpineAssetsManeger
         SpinePrefabsDict.Add(13, GetSkeletonDataAsset("/buddy/chuanghu_SkeletonData"));
         //家-管子
         SpinePrefabsDict.Add(14, GetSkeletonDataAsset("/buddy/guanzi_SkeletonData"));
+        //家-拳击柱
+        SpinePrefabsDict.Add(15, GetSkeletonDataAsset("/buddy/quanjizhu_SkeletonData"));
         //Debug.Log("SpineAssetsManeger init finish,The Spine Count is: " + SpinePrefabsDict.Keys.Count);
     }
 
