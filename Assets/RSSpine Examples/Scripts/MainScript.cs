@@ -119,8 +119,7 @@ public class MainScript : MonoBehaviour
         Debug.Log("TestToken");
         Dictionary<string, object> paramsDicts = new Dictionary<string, object>();
         paramsDicts.Add("key", "access_token");
-        paramsDicts.Add("value", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJCYXpoZkIxMCIsInV1aWQiOiI1ZDg2YThmYjhlNzU0YjVjOTlmZTQxOGViZjc3M2U0" +
-            "MCIsInRpbWVzdGFtcCI6MTcyODU0NjA1Njc5N30.IBJsvTBN7XyOMEHZEGkbQj_YH5kuHDpBpKYNCWI0xPR_-HrnuC0YdFLzP98tvvqS6MH6u3FlTsUSdxr8LdtTrg");
+        paramsDicts.Add("value", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXVpZCI6IjMzekYyY1pHIn0.kXR6AFo08ryuqYcCmeeJGj3vbQUUcz2jcoA_hJ6ot8oH0NzP5zyIDHiru8suzc78JjWGztGgPgvv_S-qFZeL1A");
         Message message = new (MessageType.Type_UI, MessageType.getStorage, paramsDicts);
         //Message message = new Message(MessageType.Type_UI, MessageType.Net_Token, "");
         MC.Instance.SendCustomMessage(message);

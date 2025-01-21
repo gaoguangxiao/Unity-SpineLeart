@@ -15,6 +15,11 @@ public class AudioManagerScript: MonoBase
         audioSource = GetComponent<AudioSource>();
     }
 
+    private void OnDestroy()
+    {
+        NetManager.Instance.UnRegister(this);
+    }
+
     public void PlayAudio(string url)
     {
        

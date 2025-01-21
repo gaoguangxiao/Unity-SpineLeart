@@ -7,11 +7,19 @@ using Newtonsoft.Json;
 
 public class UserInfoScript : NetBaseScript<UserData>
 {
-    
+
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("UserInfoScript start");
         NetManager.Instance.Register(this);
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("UserInfoScript OnDestroy");
+        NetManager.Instance.UnRegister(this);
+        //Debug.Log(NetManager.Instance.Monos);
     }
 
     public override void RefreshData()
@@ -32,12 +40,15 @@ public class UserInfoScript : NetBaseScript<UserData>
         else
         {
             string receive = request.downloadHandler.text;
-            //Debug.Log(request.downloadHandler.text);
+            Debug.Log(request.downloadHandler.text);
             rSResponse = JsonConvert.DeserializeObject<RSResponseV2<UserData>>(receive);
             //Debug.Log("rSResponse.data: " + rSResponse.Data);
             //Debug.Log("DressUpContent" + rSResponse.Data.DressUpContent);
             //Debug.Log("FaceContent lenth:" + rSResponse.Data.FaceContent.Length);
-            OnDataLoadComplete(rSResponse.Data);
+            if (rSResponse.Code == 0)
+            {
+                OnDataLoadComplete(rSResponse.Data);
+            }
         }
     }
 

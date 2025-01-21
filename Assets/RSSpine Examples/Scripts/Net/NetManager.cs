@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//接口地址
+
 //存储主App域名
 public class NetManager: ManagerBase
 {
@@ -20,6 +23,12 @@ public class NetManager: ManagerBase
         }
     }
 
+    //用户信息
+    public static string PathDress = "/wap/api/buddy/dress";
+
+    //https://gw.risekid.cn/wap/api/verification-code
+    //https://gateway-test.risekid.cn
+    //private string HostURL = "https://gw.risekid.cn";
     private string HostURL = "https://gateway-test.risekid.cn";
 
     public string GetHost()
@@ -31,7 +40,6 @@ public class NetManager: ManagerBase
     {
         HostURL = host;
     }
-
 
     private string WebHostURL = "https://qa.risekid.cn";
 

@@ -48,6 +48,7 @@ namespace Spine.Unity.Examples
 
             InitSkinSkeletonData(skeletonData);
 
+            Debug.Log("RefreshkeletonData" + sg.initialSkinName);
             //初始化默认皮肤
             characterSkin = new Skin("character-base");
             characterSkin.AddSkin(skeletonData.FindSkin(sg.initialSkinName));
@@ -67,7 +68,7 @@ namespace Spine.Unity.Examples
         /// <param name="skinName"></param>
         public void UpdateSpineSKin(string skinName)
         {
-            //Debug.Log("更换皮肤" + skinName);
+            Debug.Log("更换皮肤" + skinName);
             //startingSkin = skinName;
             //skt.SetSkin();
             UpdateCharaterSkin(skinName);
@@ -80,7 +81,7 @@ namespace Spine.Unity.Examples
         /// <param name="skinName"></param>
         public void UpdateMatchSpineSkin(string skinName)
         {
-            //Debug.Log("更换皮肤" + skinName);
+            //Debug.Log("UpdateMatchSpineSkin：" + skinName);
             Skin resultCombinedSkin = new Skin("character-combined");
             //Adds a new skin to the previous skin
             resultCombinedSkin.AddSkin(characterSkin);
@@ -96,6 +97,7 @@ namespace Spine.Unity.Examples
         {
             var skeletonData = sg.Skeleton.Data;
             characterSkin = new Skin("character-base");
+            Debug.Log("UpdateCharaterSkin" + skinName);
             characterSkin.AddSkin(skeletonData.FindSkin(skinName));
         }
 

@@ -76,7 +76,7 @@ namespace Spine.Unity.Examples
 
             DiamondText.text = userData.DiamondCount.ToString();
 
-            //Debug.Log("userdata：" + userData.FaceContent);
+            Debug.Log("userdata：" + userData.FaceContent);
             //查头发
             string toufa = "";
             string toufaColor = "";
@@ -185,44 +185,9 @@ namespace Spine.Unity.Examples
         void Update()
         {
 
-            //            float horizontal = 0;
-            //            float vertical = 0;
-            //#if UNITY_IOS && !UNITY_EDITOR
-            //            horizontal = fixedJoystick.Horizontal;
-            //            vertical = fixedJoystick.Vertical;
-            //#elif UNITY_EDITOR
-            //            horizontal = Input.GetAxis("Horizontal");
-            //            vertical = Input.GetAxis("Vertical");
-            //#endif
-
-            //            if (horizontal != 0)
-            //            {
-            //                //移动
-            //                MoveSkeObjV2(horizontal < 0 ? Vector3.left : Vector3.right);
-
-            //                //改变枪口方向 1、 -1
-            //                Vector3 vector = new Vector3(horizontal, vertical, 0);
-            //                charaterGunScript.UpdateBoneVector(vector);
-            //            }
-            //            else
-            //            {
-            //                skeletonGraphicScript.UpdatState(CharaterBodyState.Idle);
-            //            }
-
-            //            if (Input.GetKeyDown(KeyCode.J))
-            //            {
-            //                OnClickPlayShoot();
-            //            }
-
-            //            if (Input.GetKeyDown(KeyCode.K))
-            //            {
-            //                OnClickPlayJump();
-            //            }
-            //            return;
-
-            //if (skeletonGraphicScript.state == CharaterBodyState.Death) return;
-
             if (IsPause) return;
+
+            Debug.Log("touchCount is: " + Input.touchCount);
 
             //鼠标的点击
             //0左键，1右键，2滚轮
@@ -230,7 +195,7 @@ namespace Spine.Unity.Examples
             {
                 Touch touch = Input.touches[0];
                 //获取点击点【0~屏幕宽度】
-                //Debug.Log("touch is: " + touch.position + Screen.height);
+                Debug.Log("touch is: " + touch.position + Screen.height);
                 if (touch.position.y >= Screen.height - 200) return;
 
                 Vector3 chaVector = GetScreenPointByWorld(CharaterGameobject.transform.position);

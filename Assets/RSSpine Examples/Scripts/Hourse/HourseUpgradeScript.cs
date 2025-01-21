@@ -23,7 +23,7 @@ public class HourseUpgradeScript : MonoBehaviour
     private void OnUserDataLoadComplete(UserData userData)
     {
         CurrentBuddyLevel = userData.BuddyLevel;
-        CurrentBuddyLevel = 30;
+        //CurrentBuddyLevel = 30;
         Debug.Log("伙伴之家等级：" + CurrentBuddyLevel);
 
         //获取环境可加载等级名称
@@ -34,7 +34,7 @@ public class HourseUpgradeScript : MonoBehaviour
         {
             if(i < childCount)//25
             {
-                Debug.Log("i is: " + i);
+                //Debug.Log("i is: " + i);
                 GameObject itemContent = transform.GetChild(i).gameObject;
 
                 if (int.TryParse(itemContent.name, out int nameKey))

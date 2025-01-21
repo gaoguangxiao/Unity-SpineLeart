@@ -7,7 +7,6 @@ using System;
 
 public class DressNetScript : MonoBehaviour
 {
-    static string token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0dlZxZDdIdSIsInV1aWQiOiIzMjYyNGEwNzBlYTg0ZDMzYjk5YWU4MzAxYmIyNzMxMyIsInRpbWVzdGFtcCI6MTcyNjE5NjYzODI2Nn0.DcTBqUhkEJsBm2pG-3K4uS4FFM8_j_RxJgVkRrrxQUwLePRYS2xV4Lhvrb7zGjodRCKkcbcZreQDXEllBCYU1g";
 
     RSResponseV2<DressData> rSResponse;//响应数据
 
@@ -24,13 +23,14 @@ public class DressNetScript : MonoBehaviour
     /// </summary>
     public void RefreshDressData()
     {
-        StartCoroutine(GetRequestDress("https://gw.risekid.cn/wap/api/buddy/dress"));
+        StartCoroutine(GetRequestDress(NetManager.Instance.GetHost() + NetManager.PathDress));
     }
 
     IEnumerator GetRequestDress(string url)
     {
         UnityWebRequest request = UnityWebRequest.Get(url);
-        request.SetRequestHeader("token", DressNetScript.token);
+        //request.SetRequestHeader("token", DressNetScript.token);
+        request.SetRequestHeader("token", NetManager.Instance.GetToken());
         yield return request.SendWebRequest();
 
         if (request.result != UnityWebRequest.Result.Success)

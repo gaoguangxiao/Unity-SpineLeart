@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/RSSpine Examples/Scenes/BrickScene.unity
     guid: 1d79fae21b4a146a8be32492ad406651
-  m_configObjects: {}
+  m_configObjects:
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 7698649d6da994cab8dbd38d8d727b7d, type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 427dda430999b449f89878c31c386ed4, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 89f72ac03920a401280c01730b5483ef, type: 2}

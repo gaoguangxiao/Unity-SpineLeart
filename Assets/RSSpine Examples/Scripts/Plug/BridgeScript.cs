@@ -19,14 +19,15 @@ public class BridgeScript
     //定义c# 传递到原生的的委托代理，接收ios原生回传的值
     delegate void CallbackDelegate(string body);
 
+#if UNITY_IOS
     //注册回调代理
     [DllImport("__Internal")]
     private static extern void registerCallBackDelegate(CallbackDelegate callback);
 
-    //有参无回调
+    ////有参无回调
     [DllImport("__Internal")]
     private static extern void didReceiveMessage(string body);
-
+#endif
     /// <summary>
     /// C#向OC注册回调代理，unity向OC通信之前必须注册回调函数
     /// </summary>
@@ -34,9 +35,12 @@ public class BridgeScript
     {
         if (Application.platform == RuntimePlatform.IPhonePlayer)
         {
+#if UNITY_IOS
             registerCallBackDelegate(HandleOnCallbackDelegate);
+#endif
         }
     }
+
 
     private static AndroidJavaObject appBridge;
 
@@ -117,8 +121,9 @@ public class BridgeScript
         //"params":request
         if (Application.platform == RuntimePlatform.IPhonePlayer)
         {
-
+#if UNITY_IOS
             didReceiveMessage(body);
+#endif
 
         }
         else if (Application.platform == RuntimePlatform.Android)
@@ -132,8 +137,7 @@ public class BridgeScript
             {
                 Dictionary<string, object> paramsResp = new Dictionary<string, object>();
                 paramsResp.Add("key", "access_token");
-                paramsResp.Add("value", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJCYXpoZkIxMCIsInV1aWQiOiI1ZDg2YThmYjhlNzU0YjVjOTlmZTQxOGViZjc3M2U0" +
-                    "MCIsInRpbWVzdGFtcCI6MTcyODU0NjA1Njc5N30.IBJsvTBN7XyOMEHZEGkbQj_YH5kuHDpBpKYNCWI0xPR_-HrnuC0YdFLzP98tvvqS6MH6u3FlTsUSdxr8LdtTrg");
+                paramsResp.Add("value", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXVpZCI6IlljeXN5eDZVIn0.jn4WMentSIBUMYuI6NsmzQuLwpumg6NsI6AtyeNHH43MS-I1QoyOurU3OAKbiEHngT-hzz4yqftqE3mPNj7Xgw");
                 Message messageparamsResp = new(MessageType.Type_UI, MessageType.getStorage, paramsResp);
                 MC.Instance.SendCustomMessage(messageparamsResp);
                 BridgeScript.Instance.RemoveEvent(type);

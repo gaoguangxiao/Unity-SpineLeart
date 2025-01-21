@@ -7,7 +7,7 @@ using System;
 public abstract class ManagerBase
 {
     //管理某类脚本
-    List<MonoBase> Monos = new List<MonoBase>();
+    public List<MonoBase> Monos = new List<MonoBase>();
 
     //提供注册方法，可让某脚本注册
     public void Register(MonoBase mono)
@@ -18,8 +18,13 @@ public abstract class ManagerBase
             Monos.Add(mono);
         }
 
+        foreach (var tmpMone in Monos)
+        {
+            //查看注册的脚本
+            Debug.Log("Register script: " + tmpMone);            
+        }
         //打印管理类所有的注册脚本
-        //Debug.Log("Register管理数量:" + Monos.Count);
+        Debug.Log("Register的数量:" + Monos.Count);
         //LogPlug.Instance.adddLog("Register-Type" + GetMessageType() + ",Monos count:" + Monos.Count);
     }
 

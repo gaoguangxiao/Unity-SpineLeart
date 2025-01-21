@@ -13,6 +13,8 @@ public class NetConfig : MonoBase
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("NetConfig Start");
+
         NetManager.Instance.Register(this);
 
         //主动token相关
@@ -22,7 +24,12 @@ public class NetConfig : MonoBase
         BridgeScript.Instance.CallApp(message);
     }
 
-   
+    private void OnDestroy()
+    {
+        Debug.Log("NetConfig OnDestroy");
+        NetManager.Instance.UnRegister(this);
+    }
+
     // Update is called once per frame
     void Update()
     {
