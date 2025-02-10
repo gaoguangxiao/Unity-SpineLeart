@@ -21,7 +21,7 @@ public abstract class ManagerBase
         foreach (var tmpMone in Monos)
         {
             //查看注册的脚本
-            Debug.Log("Register script: " + tmpMone);            
+            Debug.Log("Register script: " + tmpMone.gameObject);            
         }
         //打印管理类所有的注册脚本
         Debug.Log("Register的数量:" + Monos.Count);
